@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import './App.css';
+import useTodos from './hooks/useTodos';
 
 function App() {
-  useEffect(() => {
-    // dummy call to API
-    console.log('making api request')
-  }, []);
+  const { data, loading, error } = useTodos();
 
   return (
     <div className="App">

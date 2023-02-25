@@ -1,26 +1,47 @@
-import { useEffect } from 'react';
 import './App.css';
-import useTodos from './hooks/useTodos';
+import Gun from 'gun'
+import {useEffect, useState} from 'react'
+
+const gun = Gun({
+  peers: ['http:localhost:8000/gun'] // Put the relay node that you want here
+})
 
 function App() {
-  const { data, loading, error } = useTodos();
+
+  const [txt, setTxt] = useState()
+
+  useEffect(() => {
+   
+    gun.get('text').once((node) => { // Retrieve the text value on startup
+      console.log(node)
+      if(node == undefined) {
+        gun.get('text').put({text: "Write the text here"})
+      } else {
+        console.log("Found Node")
+        setTxt(node.text)
+      }
+    })
+
+    gun.get('text').on((node) => { // Is called whenever text is updated
+      console.log("Receiving Update")
+      console.log(node)
+      setTxt(node.text)
+    })
+  }, [])
+
+  const updateText = (event) => {
+    console.log("Updating Text")
+    console.log(event.target.value)
+    gun.get('text').put({text: event.target.value}) // Edit the value in our db
+    setTxt(event.target.value)
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Collaborative Document With GunJS</h1>
+      <textarea value = {txt} onChange = {updateText}/>
     </div>
+    
   );
 }
 

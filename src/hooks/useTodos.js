@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import useFetch from "./useFetch";
-import { getTodos } from "./requests";
+import { getTodos } from "../utils/api";
 
 const useTodos = () => {
     const request = useMemo(() => getTodos(), []);

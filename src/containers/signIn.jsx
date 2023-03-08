@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
 const SignIn = () => {
-  useEffect(() => {
+    useEffect(() => {
 
-  }, [])
+    }, [])
 
-  return (
-    <div className="sign-in">
-        sign in
-    </div>
-  );
+    return (
+        <div className="sign-in">
+            sign in
+        </div>
+    );
 }
 
 export default SignIn;

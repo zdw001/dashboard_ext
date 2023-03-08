@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-const SignUp = () => {
+const Dashboard = () => {
     useEffect(() => {
 
     }, [])
 
     return (
-        <div className="sign-up">
-            sign up
+        <div className="dashboard">
+            dashboard
         </div>
     );
 }
 
-export default SignUp;
+export default Dashboard;

@@ -1,8 +1,18 @@
 import './App.css';
-// import Gun from 'gun';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+
 import GUN from 'gun/gun';
 import SEA from 'gun/sea';
+import Dashboard from './containers/dashboard';
+import SignIn from './containers/signIn';
+import SignUp from './containers/signUp';
 
 const gun = GUN()
 
@@ -14,6 +24,7 @@ let user = gun.user();
 
 
 // const user = gun.user();
+
 
 function App() {
 
@@ -51,6 +62,8 @@ function App() {
   return (
     <div className="App">
       <h1>Collaborative Document With GunJS</h1>
+      <Link to='/sign-in'>Sign in</Link>
+      <Link to='/sign-up'>Sign up</Link>
       <textarea value={txt} onChange={updateText} />
     </div>
 

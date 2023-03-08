@@ -7,7 +7,7 @@ const SignIn = () => {
 
   return (
     <div className="sign-in">
-
+        sign in
     </div>
   );
 }

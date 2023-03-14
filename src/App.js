@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { useEffect, useState } from 'react';
 import Dashboard from './containers/dashboard';
 import SignIn from './containers/signIn';

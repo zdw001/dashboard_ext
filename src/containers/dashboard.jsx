@@ -1,20 +1,6 @@
 import { useEffect, useState } from 'react';
-import GUN from 'gun/gun';
-import SEA from 'gun/sea';
 
-
-const gun = GUN()
-
-// const gun = Gun({
-//   peers: ['https://arcane-sierra-12302.herokuapp.com/gun'] // Put the relay node that you want here
-// });
-
-let user = gun.user();
-
-
-// const user = gun.user();
-
-const Dashboard = () => {
+const Dashboard = ({ user, gun }) => {
     const [txt, setTxt] = useState();
 
     useEffect(() => {

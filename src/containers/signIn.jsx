@@ -3,7 +3,7 @@ import {
     validateEmail
 } from '../utils/general';
 
-const SignIn = () => {
+const SignIn = ({ navigate, user }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -29,10 +29,20 @@ const SignIn = () => {
         if (!isValidEmail) {
             // Error
             setFormError(true);
+            setLoading(false);
+            return;
         }
 
-        setLoading(false)
+        console.log('SUBMITTING...')
+        user.auth(username, password, handleCallback)
     };
+
+    const handleCallback = (resp) => {
+        console.log('....RESPONSE')
+        console.log(resp)
+
+        navigate("dashboard")
+    }
 
     return (
         <div className="sign-in content">
@@ -44,6 +54,9 @@ const SignIn = () => {
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             <div className="btn" onClick={handleSubmit}>
                 Submit
+            </div>
+            <div>
+                No account? <span onClick={() => navigate("sign-up")}>Sign up</span>.
             </div>
         </div>
     );

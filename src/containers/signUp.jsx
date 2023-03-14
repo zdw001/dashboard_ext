@@ -4,16 +4,12 @@ import {
     validatePassword
 } from '../utils/general';
 
-const SignUp = () => {
+const SignUp = ({ navigate, user }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-
-    useEffect(() => {
-
-    }, [])
 
     useEffect(() => {
         if (usernameError) setUsername(false);
@@ -31,19 +27,33 @@ const SignUp = () => {
         let isValidPassword = validatePassword(password);
 
         if (!isValidEmail) {
+            console.log('EMAIL ERROR')
             setUsernameError(true);
+            setLoading(false);
+            return;
         }
 
         if (!isValidPassword) {
+            console.log('PASSWORD ERROR')
             setPasswordError(true);
+            setLoading(false);
+            return;
         }
 
-        setLoading(false)
+        console.log('CREATING USER...')
+        user.create(username, password, handleSuccess)
+    };
+
+    const handleSuccess = (value) => {
+        console.log('...CREATED!')
+        console.log(value);
+
+        navigate("dashboard"); 
     };
 
     return (
         <div className="sign-in content">
-            sign in
+            sign up
             {
                 usernameError && <div className="error">invalid username.</div>
             }
@@ -53,10 +63,10 @@ const SignUp = () => {
             }
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             <div className="btn" onClick={handleSubmit}>
-                Submit
+                Create Account
             </div>
             <div>
-                No account? <span>Sign up</span>.
+                Already have an account? <span onClick={() => navigate("sign-in")}>Sign in</span>.
             </div>
         </div>
     );

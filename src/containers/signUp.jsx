@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
     validateEmail,
-
+    validatePassword
 } from '../utils/general';
 
 const SignUp = () => {

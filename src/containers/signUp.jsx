@@ -3,8 +3,11 @@ import {
     validateEmail,
     validatePassword
 } from '../utils/general';
+import {
+    user
+} from '../utils/gun';
 
-const SignUp = ({ navigate, user }) => {
+const SignUp = ({ navigate }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -41,14 +44,21 @@ const SignUp = ({ navigate, user }) => {
         }
 
         console.log('CREATING USER...')
-        user.create(username, password, handleSuccess)
+        user.create(username, password, handleAuth);
+
+    };
+
+    const handleAuth = () => {
+        user.auth(username, password, handleSuccess)
     };
 
     const handleSuccess = (resp) => {
+        console.log('auth resp:')
         console.log(resp)
         if (resp.err) {
             setLoading(false);
-            setFormError(true);
+            setUsername("");
+            setPassword("");
             return;
         }
 

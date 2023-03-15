@@ -4,12 +4,12 @@ import {
     gun
 } from '../utils/gun';
 
-const Dashboard = () => {
+const Dashboard = ({ navigate }) => {
     const [txt, setTxt] = useState();
 
     useEffect(() => {
         console.log("DASHBOARD user.is: ")
-        console.log(user.is)
+        console.log(user)
 
         gun.get('text').once((node) => { // Retrieve the text value on startup
             console.log(node)
@@ -35,19 +35,21 @@ const Dashboard = () => {
         setTxt(event.target.value)
     }
 
-    const ask_is = () => {
-        console.log('DASHBOARD: user.is:')
-        console.log(user.is)
+    const handleSignOut = () => {
+        sessionStorage.clear();
+        localStorage.clear();
+
+        user.leave();
+
+        navigate("sign-in");
     };
 
     return (
         <div className="dashboard">
-            dashboard
-
+            <h1>{user.is.alias}'s dashboard</h1>
             <h1>Collaborative Document With GunJS</h1>
             <textarea value={txt} onChange={updateText} />
-
-            <div onClick={ask_is}>is?</div>
+            <div onClick={handleSignOut}>Sign out</div>
         </div>
     );
 }

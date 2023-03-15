@@ -25,7 +25,7 @@ function App() {
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard />
+        return <Dashboard navigate={setPage} />
       case "sign-up":
         return <SignUp navigate={setPage} />
       case "sign-in":

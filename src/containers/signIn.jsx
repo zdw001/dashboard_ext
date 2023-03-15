@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import {
     validateEmail
 } from '../utils/general';
+import {
+    user
+} from '../utils/gun';
 
-const SignIn = ({ navigate, user }) => {
+const SignIn = ({ navigate }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -28,8 +31,8 @@ const SignIn = ({ navigate, user }) => {
 
         if (!isValidEmail) {
             // Error
-            setFormError(true);
             setLoading(false);
+            setFormError(true);
             return;
         }
 
@@ -38,11 +41,25 @@ const SignIn = ({ navigate, user }) => {
     };
 
     const handleCallback = (resp) => {
-        console.log('....RESPONSE')
         console.log(resp)
+        if (resp.err) {
+            setLoading(false);
+            setFormError(true);
+            return;
+        }
 
-        navigate("dashboard")
-    }
+        setTimeout(() => {
+            saveToLocalStorage();
+        }, 500);
+
+        navigate("dashboard");
+    };
+
+    const saveToLocalStorage = () => {
+        let pair = sessionStorage.getItem('pair');
+
+        localStorage.setItem('pair', pair)
+    };
 
     return (
         <div className="sign-in content">

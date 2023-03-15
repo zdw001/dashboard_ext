@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
+import {
+    user,
+    gun
+} from '../utils/gun';
 
-const Dashboard = ({ user, gun }) => {
+const Dashboard = () => {
     const [txt, setTxt] = useState();
 
     useEffect(() => {
-        user.create("zdw001", "Florida1")
-        console.log("user: ")
-        console.log(user)
+        console.log("DASHBOARD user.is: ")
+        console.log(user.is)
 
         gun.get('text').once((node) => { // Retrieve the text value on startup
             console.log(node)
@@ -32,12 +35,19 @@ const Dashboard = ({ user, gun }) => {
         setTxt(event.target.value)
     }
 
+    const ask_is = () => {
+        console.log('DASHBOARD: user.is:')
+        console.log(user.is)
+    };
+
     return (
         <div className="dashboard">
             dashboard
 
             <h1>Collaborative Document With GunJS</h1>
             <textarea value={txt} onChange={updateText} />
+
+            <div onClick={ask_is}>is?</div>
         </div>
     );
 }

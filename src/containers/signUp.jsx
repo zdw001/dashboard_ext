@@ -44,11 +44,25 @@ const SignUp = ({ navigate, user }) => {
         user.create(username, password, handleSuccess)
     };
 
-    const handleSuccess = (value) => {
-        console.log('...CREATED!')
-        console.log(value);
+    const handleSuccess = (resp) => {
+        console.log(resp)
+        if (resp.err) {
+            setLoading(false);
+            setFormError(true);
+            return;
+        }
 
-        navigate("dashboard"); 
+        setTimeout(() => {
+            saveToLocalStorage();
+        }, 500);
+
+        navigate("dashboard");
+    };
+
+    const saveToLocalStorage = () => {
+        let pair = sessionStorage.getItem('pair');
+
+        localStorage.setItem('pair', pair)
     };
 
     return (

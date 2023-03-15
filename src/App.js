@@ -3,25 +3,20 @@ import { useEffect, useState } from 'react';
 import Dashboard from './containers/dashboard';
 import SignIn from './containers/signIn';
 import SignUp from './containers/signUp';
-import GUN from 'gun/gun';
-import SEA from 'gun/sea';
+import {
+  user
+} from './utils/gun';
 
 
 function App() {
-  const [page, setPage] = useState("dashboard");
-
-  const gun = GUN({
-    peers: ['https://arcane-sierra-12302.herokuapp.com/gun']
-  })
-  let user = gun.user();
+  const [page, setPage] = useState(null);
 
   useEffect(() => {
     handleSession();
   }, []);
 
   const handleSession = () => {
-    console.log('USER:')
-    console.log(user)
+    console.log('APP user.is:')
     console.log(user.is)
     if (user.is) setPage("dashboard");
     else setPage("sign-in");
@@ -30,11 +25,13 @@ function App() {
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard user={user} gun={gun} />
+        return <Dashboard />
       case "sign-up":
-        return <SignUp user={user} navigate={setPage} />
+        return <SignUp navigate={setPage} />
+      case "sign-in":
+        return <SignIn navigate={setPage} />
       default:
-        return <SignIn user={user} navigate={setPage} />
+        return
     }
   }
 

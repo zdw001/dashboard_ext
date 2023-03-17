@@ -62,18 +62,32 @@ const SignIn = ({ navigate }) => {
     };
 
     return (
-        <div className="sign-in content">
-            sign in
-            {
-                formError && <div className="error">invalid username/password.</div>
-            }
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <div className="btn" onClick={handleSubmit}>
-                Submit
-            </div>
-            <div>
-                No account? <span onClick={() => navigate("sign-up")}>Sign up</span>.
+        <div className="content">
+            <div className="sign-in">
+                <div>
+                    <div className="text-large font-bold">
+                        Welcome back 👋
+                    </div>
+                    {
+                        formError && <div className="error">invalid username/password.</div>
+                    }
+                    <div className="inputs">
+                        <div class="input-wrapper">
+                            <label for="username">Username</label>
+                            <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="password">Password</label>
+                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="btn" onClick={handleSubmit}>
+                        Submit
+                    </div>
+                    <div className='text-small center sign-up-link'>
+                        <p>No account? <span onClick={() => navigate("sign-up")}>Sign up</span>.</p>
+                    </div>
+                </div>
             </div>
         </div>
     );

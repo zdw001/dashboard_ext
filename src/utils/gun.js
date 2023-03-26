@@ -5,6 +5,9 @@ const gun = GUN({
     peers: ['https://arcane-sierra-12302.herokuapp.com/gun']
 });
 
+const sea = SEA;
+
+
 let pair = localStorage.getItem('pair');
 
 if (pair) {
@@ -15,5 +18,6 @@ let user = gun.user().recall({ sessionStorage: true });
 
 export {
     gun,
+    sea,
     user
 }

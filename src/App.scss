@@ -72,12 +72,13 @@ body {
     background-color: $color-primary-100;
     color: $color-gray-700;
     border-radius: $border-radius;
-    width: 260px;
+    width: 100%;
     padding: 0.65rem 1rem;
     text-align: center;
     display: inline-block;
     margin-top: 30px;
     margin-bottom: 1rem;
+    border: none;
 
     &:hover {
       cursor: pointer;

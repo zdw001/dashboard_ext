@@ -3,6 +3,7 @@ import {
     validateEmail
 } from '../utils/general';
 import {
+    sea,
     user
 } from '../utils/gun';
 
@@ -20,7 +21,8 @@ const SignIn = ({ navigate }) => {
         if (formError) setFormError(false);
     }, [username, password]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         setLoading(true);
 
         console.log(username);
@@ -48,6 +50,8 @@ const SignIn = ({ navigate }) => {
             return;
         }
 
+        decryptUserData();
+
         setTimeout(() => {
             saveToLocalStorage();
         }, 500);
@@ -65,6 +69,20 @@ const SignIn = ({ navigate }) => {
         if (formError) return <div className="error">invalid username/password.</div>;
         else return <div className="error"></div>;
     };
+
+    const decryptUserData = async () => {
+        let keyPair = await sea.pair();
+
+        let fetchedData = await user.get('data');
+
+        console.log('fetchedData')
+        console.log(fetchedData)
+
+        let decryptedUserData = await sea.decrypt(fetchedData, keyPair);
+
+        console.log('decryptedUserData: ')
+        console.log(decryptedUserData)
+    }
 
     return (
         <div className="content">

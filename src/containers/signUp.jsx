@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import {
+    generateUuid,
     validateEmail,
     validatePassword
 } from '../utils/general';
 import {
+    sea,
     user
 } from '../utils/gun';
 
@@ -15,15 +17,15 @@ const SignUp = ({ navigate }) => {
     const [passwordError, setPasswordError] = useState(false);
 
     useEffect(() => {
-        if (usernameError) setUsername(false);
+        if (usernameError) setUsernameError(false);
     }, [username]);
 
     useEffect(() => {
         if (passwordError) setPasswordError(false);
     }, [password]);
 
-    const handleSubmit = () => {
-        console.log('HANDLE SUBMIT')
+    const handleSubmit = (e) => {
+        e.preventDefault();
         setLoading(true);
 
         // Validate email address
@@ -31,12 +33,10 @@ const SignUp = ({ navigate }) => {
         let isValidPassword = validatePassword(password);
 
         if (!isValidEmail) {
-            console.log('EMAIL ERROR')
             setUsernameError(true);
         }
 
         if (!isValidPassword) {
-            console.log('PASSWORD ERROR')
             setPasswordError(true);
         }
 
@@ -46,15 +46,14 @@ const SignUp = ({ navigate }) => {
         }
 
         console.log('CREATING USER...')
-        user.create(username, password, handleAuth);
-
+        user.create(username, password, handleCreateResponse);
     };
 
-    const handleAuth = () => {
-        user.auth(username, password, handleSuccess)
+    const handleCreateResponse = async () => {
+        user.auth(username, password, handleAuthResponse);
     };
 
-    const handleSuccess = (resp) => {
+    const handleAuthResponse = (resp) => {
         console.log('auth resp:')
         console.log(resp)
         if (resp.err) {
@@ -63,6 +62,8 @@ const SignUp = ({ navigate }) => {
             setPassword("");
             return;
         }
+
+        createUserObject();
 
         setTimeout(() => {
             saveToLocalStorage();
@@ -84,6 +85,26 @@ const SignUp = ({ navigate }) => {
         else return <div className="error"></div>;
     };
 
+    const createUserObject = async () => {
+        let keyPair = await sea.pair();
+        let userData = {
+            id: generateUuid(),
+            username: username,
+            createdAt: Date.now()
+        };
+
+        console.log('userData:')
+        console.log(userData)
+
+
+        let encryptedUserData = await sea.encrypt(userData, keyPair);
+
+        console.log('encryptedUserData: ')
+        console.log(encryptedUserData)
+
+        await user.get('data').put(encryptedUserData);
+    }
+
     return (
         <div className="content">
             <div className="sign-in">
@@ -103,9 +124,9 @@ const SignUp = ({ navigate }) => {
                                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                             </div>
                         </div>
-                        <div className="btn" onClick={handleSubmit}>
+                        <button className="btn" onClick={handleSubmit}>
                             Create Account
-                        </div>
+                        </button>
                     </form>
                     <div className='text-small center sign-up-link'>
                         Already have an account? <span onClick={() => navigate("sign-in")}>Sign in</span>.

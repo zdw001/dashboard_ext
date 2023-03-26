@@ -61,6 +61,11 @@ const SignIn = ({ navigate }) => {
         localStorage.setItem('pair', pair)
     };
 
+    const getErrorMsg = () => {
+        if (formError) return <div className="error">invalid username/password.</div>;
+        else return <div className="error"></div>;
+    };
+
     return (
         <div className="content">
             <div className="sign-in">
@@ -68,22 +73,24 @@ const SignIn = ({ navigate }) => {
                     <div className="text-large font-bold">
                         Welcome back 👋
                     </div>
-                    {
-                        formError && <div className="error">invalid username/password.</div>
-                    }
-                    <div className="inputs">
-                        <div class="input-wrapper">
-                            <label for="username">Username</label>
-                            <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                    <form onSubmit={handleSubmit}>
+                        <div className="inputs">
+                            {
+                                getErrorMsg()
+                            }
+                            <div className="input-wrapper">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                            </div>
+                            <div className="input-wrapper">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                            </div>
                         </div>
-                        <div class="input-wrapper">
-                            <label for="password">Password</label>
-                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                        </div>
-                    </div>
-                    <div className="btn" onClick={handleSubmit}>
-                        Submit
-                    </div>
+                        <button className="btn" onClick={handleSubmit}>
+                            Submit
+                        </button>
+                    </form>
                     <div className='text-small center sign-up-link'>
                         <p>No account? <span onClick={() => navigate("sign-up")}>Sign up</span>.</p>
                     </div>

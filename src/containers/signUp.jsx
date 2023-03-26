@@ -23,6 +23,7 @@ const SignUp = ({ navigate }) => {
     }, [password]);
 
     const handleSubmit = () => {
+        console.log('HANDLE SUBMIT')
         setLoading(true);
 
         // Validate email address
@@ -76,6 +77,13 @@ const SignUp = ({ navigate }) => {
         localStorage.setItem('pair', pair)
     };
 
+    const getErrorMsg = () => {
+        if (usernameError && passwordError) return <div className="error">invalid username and password.</div>;
+        if (usernameError) return <div className="error">invalid username.</div>;
+        if (passwordError) return <div className="error">invalid password.</div>;
+        else return <div className="error"></div>;
+    };
+
     return (
         <div className="content">
             <div className="sign-in">
@@ -83,25 +91,22 @@ const SignUp = ({ navigate }) => {
                     <div className="text-large font-bold">
                         Sign up
                     </div>
-                    <div className="inputs">
-                        {
-                            usernameError && <div className="error">invalid username.</div>
-                        }
-                        <div class="input-wrapper">
-                            <label for="username">Username</label>
-                            <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                    <form onSubmit={handleSubmit}>
+                        <div className="inputs">
+                            {getErrorMsg()}
+                            <div className="input-wrapper">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                            </div>
+                            <div className="input-wrapper">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                            </div>
                         </div>
-                        {
-                            passwordError && <div className="error">invalid password.</div>
-                        }
-                        <div class="input-wrapper">
-                            <label for="password">Password</label>
-                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <div className="btn" onClick={handleSubmit}>
+                            Create Account
                         </div>
-                    </div>
-                    <div className="btn" onClick={handleSubmit}>
-                        Create Account
-                    </div>
+                    </form>
                     <div className='text-small center sign-up-link'>
                         Already have an account? <span onClick={() => navigate("sign-in")}>Sign in</span>.
                     </div>

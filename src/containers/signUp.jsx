@@ -45,7 +45,6 @@ const SignUp = ({ navigate }) => {
             return;
         }
 
-        console.log('CREATING USER...')
         user.create(username, password, handleCreateResponse);
     };
 
@@ -86,23 +85,20 @@ const SignUp = ({ navigate }) => {
     };
 
     const createUserObject = async () => {
-        let keyPair = await sea.pair();
         let userData = {
             id: generateUuid(),
             username: username,
+            profile: {},
+            settings: {},
+            websites: [],
             createdAt: Date.now()
         };
 
-        console.log('userData:')
-        console.log(userData)
+        let encryptedUserData = await sea.encrypt(userData, user._.sea);
 
+        await user.get('user').put(encryptedUserData);
 
-        let encryptedUserData = await sea.encrypt(userData, keyPair);
-
-        console.log('encryptedUserData: ')
-        console.log(encryptedUserData)
-
-        await user.get('data').put(encryptedUserData);
+        return;
     }
 
     return (

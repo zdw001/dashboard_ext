@@ -6,8 +6,6 @@ const gun = GUN({
 });
 
 const sea = SEA;
-
-
 let pair = localStorage.getItem('pair');
 
 if (pair) {

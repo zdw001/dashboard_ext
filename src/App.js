@@ -10,14 +10,13 @@ import {
 
 function App() {
   const [page, setPage] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     handleSession();
   }, []);
 
   const handleSession = () => {
-    console.log('APP user.is:')
-    console.log(user.is)
     if (user.is) setPage("dashboard");
     else setPage("sign-in");
   }

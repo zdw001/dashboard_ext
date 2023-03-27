@@ -14,6 +14,8 @@ body {
   $color-gray-600: #4d4d4d;
   $color-gray-700: #333333;
   $red: #FF5733;
+  $box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
+  rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   $border-radius: 6px;
 
@@ -21,8 +23,17 @@ body {
   font-family: 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  input {
+    border: none;
+
+    &:focus {
+      outline: none !important;
+    }
+  }
 
   .input-wrapper {
     position: relative;
@@ -35,10 +46,6 @@ body {
       margin: 10px 0;
       line-height: 6ex;
       padding: 0 1rem;
-
-      &:focus {
-        outline: none !important;
-      }
     }
 
     label {
@@ -86,6 +93,18 @@ body {
     }
   }
 
+  .icon-sm {
+    font-size: 1rem
+  }
+
+  .icon-md {
+    font-size: 1.5rem;
+  }
+
+  .icon-lg {
+    font-size: 2rem;
+  }
+
   .content {
     width: 80%;
     max-width: 1000px;
@@ -115,6 +134,96 @@ body {
       .sign-up-link {
         &:hover {
           cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .dashboard {
+    padding: 1rem;
+
+    .top-nav {
+      height: 80px;
+
+      div {
+        display: inline-block;
+      }
+
+      .add-website {
+        width: calc(50% - 130px);
+
+        .btn {
+          width: 100px;
+          margin-left: 40px;
+        }
+      }
+
+      .search {
+        width: 260px;
+        padding: 1rem 0;
+
+        .search-wrapper {
+          position: relative;
+          border-bottom: 2px solid $color-gray-600;
+          width: 100%;
+          height: 32px;
+
+          .search-icon {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            color: $color-gray-500;
+            font-weight: 600;
+          }
+
+          input {
+            margin: 4px 0 4px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+
+            &::placeholder {
+              color: $color-gray-300;
+            }
+
+          }
+
+          &:focus {
+            border-bottom: color-gray-700;
+
+            .search-icon {
+              color: $color-gray-700;
+            }
+          }
+        }
+      }
+
+      .settings {
+        position: relative;
+        padding: 1rem;
+        float: right;
+
+        .settings-icon {
+          color: $color-gray-300;
+
+          &:hover {
+            cursor: pointer;
+            color: $color-gray-400
+          }
+        }
+
+        .settings-menu {
+          position: absolute;
+          width: 220px;
+          top: 50px;
+          right: 10px;
+          // border: 1px solid #dadce0;
+          border-radius: $border-radius;
+          box-shadow: $box-shadow;
+
+          .settings-option {
+            padding: 8px 16px;
+            padding: 8px 16px;
+          }
         }
       }
     }

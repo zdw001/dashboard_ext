@@ -7,8 +7,10 @@ body {
   $color-primary-500: #666666;
   $color-primary-600: #4d4d4d;
   $color-primary-700: #333333;
-  $color-gray-200: #b3b3b3;
-  $color-gray-300: #999999;
+  $color-white: #ffffff;
+  $color-gray-100: #f8f8f8;
+  $color-gray-200: #cccccc;
+  $color-gray-300: #a6a6a6;
   $color-gray-400: #808080;
   $color-gray-500: #666666;
   $color-gray-600: #4d4d4d;
@@ -17,7 +19,9 @@ body {
   $box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
   rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
+  $border-radius-sm: 2px;
   $border-radius: 6px;
+  $border-radius-lg: 16px;
 
   margin: 0;
   font-family: 'Roboto', 'Oxygen',
@@ -149,6 +153,25 @@ body {
         display: inline-block;
       }
 
+      .nav-icon-wrapper {
+        display: inline-block;
+        border-radius: 50px;
+        padding: 12px;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $color-gray-100;
+
+          .nav-icon {
+            color: $color-gray-600;
+          }
+        }
+
+        .nav-icon {
+          color: $color-gray-400;
+        }
+      }
+
       .add-website {
         width: calc(50% - 130px);
 
@@ -159,27 +182,77 @@ body {
       }
 
       .search {
+        position: relative;
         width: 260px;
         padding: 1rem 0;
 
+        .search-blur {
+          position: fixed;
+          z-index: 99;
+          height: 100vh;
+          width: 100vw;
+          top: 0;
+          left: 0;
+          opacity: 1;
+          background-color: $color-white;
+          transition: z-index 0.5s step-end, opacity 0.5s ease-in-out;
+
+          &.show-dashboard {
+            opacity: 0;
+            z-index: -1;
+          }
+        }
+
         .search-wrapper {
-          position: relative;
-          border-bottom: 2px solid $color-gray-600;
-          width: 100%;
-          height: 32px;
+          position: fixed;
+          z-index: 100;
+          left: 50%;
+          top: 42%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          box-shadow: $box-shadow;
+          transition: all 0.2s ease-in-out;
+          border-radius: 33px;
+          padding: 1px 75px;
+          width: 320px;
+          height: 66px;
+
+          &.show-dashboard {
+            border-radius: 22px;
+            padding: 1px 50px;
+            width: 260px;
+            height: 44px;
+            top: 60px;
+
+            .search-icon {
+              font-size: 1rem;
+              top: 14px;
+              left: 20px;
+            }
+
+            input {
+              font-size: 1rem;
+              font-weight: 600;
+              line-height: 42px;
+            }
+          }
 
           .search-icon {
             position: absolute;
-            top: 6px;
-            left: 6px;
+            font-size: 1.5rem;
+            top: 21px;
+            left: 30px;
             color: $color-gray-500;
             font-weight: 600;
+            transition: all 0.2s ease-in-out;
           }
 
           input {
-            margin: 4px 0 4px 32px;
-            font-size: 1rem;
+            font-size: 1.5rem;
             font-weight: 600;
+            line-height: 63px;
+            transition: all 0.2s ease-in-out;
+
 
             &::placeholder {
               color: $color-gray-300;
@@ -199,25 +272,15 @@ body {
 
       .settings {
         position: relative;
-        padding: 1rem;
         float: right;
-
-        .settings-icon {
-          color: $color-gray-300;
-
-          &:hover {
-            cursor: pointer;
-            color: $color-gray-400
-          }
-        }
 
         .settings-menu {
           position: absolute;
           width: 220px;
           top: 50px;
           right: 10px;
-          // border: 1px solid #dadce0;
-          border-radius: $border-radius;
+          border: 1px solid #dadce0;
+          border-radius: $border-radius-sm;
           box-shadow: $box-shadow;
 
           .settings-option {

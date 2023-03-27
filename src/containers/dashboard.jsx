@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
+import TopNav from '../components/topNav';
 import { user, sea, gun } from '../utils/gun';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
-import SettingsMenu from '../components/settingsMenu';
 
 const Dashboard = ({ navigate }) => {
     // const [txt, setTxt] = useState();
@@ -29,7 +27,6 @@ const Dashboard = ({ navigate }) => {
 
 
     const [data, setData] = useState(null);
-    const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
     useEffect(() => {
         fetchUserData();
@@ -63,6 +60,7 @@ const Dashboard = ({ navigate }) => {
 
     return (
         <div className="dashboard">
+            <TopNav />
             {
                 data === null ? (
                     <div className="loading">
@@ -70,28 +68,7 @@ const Dashboard = ({ navigate }) => {
                     </div>
                 ) : (
                     <div>
-                        <div className="top-nav">
-                            <div className="add-website">
-                                <div className="btn text-small">Add Website</div>
-                            </div>
-                            <div className="search">
-                                <div className="search-wrapper">
-                                    <FontAwesomeIcon className='search-icon icon-sm' icon={icon({ name: 'search' })} />
-                                    <input type="text" placeholder="Search command center" />
-                                </div>
-                            </div>
-                            <div className="settings">
-                                <FontAwesomeIcon
-                                    className='settings-icon icon-md'
-                                    icon={icon({ name: 'cog' })}
-                                    onClick={() => setShowSettingsMenu(prev => !prev)}
-                                />
-                                {
-                                    showSettingsMenu && <SettingsMenu />
-                                }
-                            </div>
-                        </div>
-                        {/* <h1>{data.username}'s Command Center</h1> */}
+                        dashboard
                     </div>
                 )
             }

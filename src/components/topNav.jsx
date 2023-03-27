@@ -6,15 +6,17 @@ import SettingsMenu from '../components/settingsMenu';
 
 
 
-const TopNav = () => {
+const TopNav = ({setShowAddWebsite}) => {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showDashboard, setShowDashboard] = useState(false)
 
     return (
         <div className="top-nav">
-            <div className="nav-icon-wrapper">
-                <FontAwesomeIcon className="nav-icon icon-md" icon={icon({ name: "plus" })} />
-                <div className="label">Add Website</div>
+            <div>
+                <div className="nav-icon-wrapper" onClick={setShowAddWebsite}>
+                    <FontAwesomeIcon className="nav-icon icon-md" icon={icon({ name: "plus" })} />
+                    <div className="label text-small">Add Website</div>
+                </div>
             </div>
             <div className="search">
                 <div className={showDashboard ? "search-blur show-dashboard" : "search-blur"} onClick={() => setShowDashboard(true)}></div>
@@ -27,8 +29,9 @@ const TopNav = () => {
                     />
                 </div>
             </div>
-            <div className="settings nav-icon-wrapper">
-                <div className='label'>Settings</div>
+            <div className="settings">
+             <div className="nav-icon-wrapper">
+                <div className='label text-small'>Settings</div>
                 <FontAwesomeIcon
                     className='nav-icon icon-md'
                     icon={icon({ name: 'cog' })}
@@ -37,6 +40,7 @@ const TopNav = () => {
                 {
                     showSettingsMenu && <SettingsMenu />
                 }
+            </div>
             </div>
         </div>
     );

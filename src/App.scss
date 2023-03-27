@@ -97,6 +97,20 @@ body {
     }
   }
 
+  .modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 9;
+
+    .modal-background {
+      opacity: 0.5;
+      background-color: $color-gray-700;
+    }
+  }
+
   .icon-sm {
     font-size: 1rem
   }
@@ -154,21 +168,36 @@ body {
       }
 
       .nav-icon-wrapper {
-        display: inline-block;
-        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: $border-radius-sm;
         padding: 12px;
+
+        .label {
+          max-width: 0;
+          white-space: nowrap;
+          transition: max-width 0.3s ease-in-out;
+          overflow: hidden;
+          margin: 0 12px;
+          color: $color-gray-700;
+        }
+
+        .nav-icon {
+          color: $color-gray-600;
+        }
 
         &:hover {
           cursor: pointer;
           background-color: $color-gray-100;
 
-          .nav-icon {
-            color: $color-gray-600;
+          .label {
+            display: inline;
+            max-width: 300px;
           }
-        }
 
-        .nav-icon {
-          color: $color-gray-400;
+          .nav-icon {
+            color: $color-gray-700;
+          }
         }
       }
 
@@ -252,6 +281,7 @@ body {
             font-weight: 600;
             line-height: 63px;
             transition: all 0.2s ease-in-out;
+            width: 100%;
 
 
             &::placeholder {

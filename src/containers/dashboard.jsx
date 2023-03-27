@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopNav from '../components/topNav';
 import { user, sea, gun } from '../utils/gun';
+import Modal from '../components/modal';
 
 const Dashboard = ({ navigate }) => {
     // const [txt, setTxt] = useState();
@@ -27,6 +28,7 @@ const Dashboard = ({ navigate }) => {
 
 
     const [data, setData] = useState(null);
+    const [showAddWebiste, setShowAddWebsite] = useState(false);
 
     useEffect(() => {
         fetchUserData();
@@ -60,7 +62,7 @@ const Dashboard = ({ navigate }) => {
 
     return (
         <div className="dashboard">
-            <TopNav />
+            <TopNav setShowAddWebsite={setShowAddWebsite}/>
             {
                 data === null ? (
                     <div className="loading">
@@ -69,6 +71,7 @@ const Dashboard = ({ navigate }) => {
                 ) : (
                     <div>
                         dashboard
+                        { showAddWebiste && <Modal></Modal>}
                     </div>
                 )
             }

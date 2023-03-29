@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopNav from '../components/topNav';
 import { user, sea, gun } from '../utils/gun';
-import Modal from '../components/modal';
+import AddWebsiteModal from '../components/modal';
 
 const Dashboard = ({ navigate }) => {
     // const [txt, setTxt] = useState();
@@ -70,8 +70,7 @@ const Dashboard = ({ navigate }) => {
                     </div>
                 ) : (
                     <div>
-                        dashboard
-                        { showAddWebiste && <Modal></Modal>}
+                        { showAddWebiste && <AddWebsiteModal hideModal={() => setShowAddWebsite(false)}/>}
                     </div>
                 )
             }

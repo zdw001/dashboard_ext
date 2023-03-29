@@ -1,5 +1,4 @@
 body {
-
   $color-primary-100: #cccccc;
   $color-primary-200: #b3b3b3;
   $color-primary-300: #999999;
@@ -15,10 +14,12 @@ body {
   $color-gray-500: #666666;
   $color-gray-600: #4d4d4d;
   $color-gray-700: #333333;
+  $color-gray-800: #1a1a1a;
   $red: #FF5733;
   $box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
   rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-
+  $box-shadow-dark: rgba(60, 64, 67, 0.8) 0px 1px 2px 0,
+  rgba(60, 64, 67, 0.4) 0px 2px 6px 2px;
   $border-radius-sm: 2px;
   $border-radius: 6px;
   $border-radius-lg: 16px;
@@ -30,6 +31,10 @@ body {
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  h1 {
+    margin: 0;
+  }
 
   input {
     border: none;
@@ -97,17 +102,43 @@ body {
     }
   }
 
-  .modal-wrapper {
+  .modal-background {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
-    z-index: 9;
+    z-index: 99;
+    opacity: 0.7;
+    background-color: $color-gray-700;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(15px);
+    transition: all 0.2s ease-in-out;
+    transition-delay: 0.2s;
 
-    .modal-background {
-      opacity: 0.5;
-      background-color: $color-gray-700;
+    animation: fade-in .2s ease-out;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease-out;
+    display: flex;
+
+    .modal {
+      opacity: 1;
+      z-index: 100;
+      width: 660px;
+      max-width: 100%;
+      height: 600px;
+      max-height: 100%;
+      background-color: $color-white;
+      border-radius: $border-radius-sm;
+      box-shadow: $box-shadow-dark;
+      padding: 3rem;
+      box-sizing: border-box;
+      animation: slide-down .2s ease-out;;
+      -webkit-animation: slide-down .2s ease-out;;
+      -moz-animation: slide-down .2s ease-out;;
+      transition: all 0.2s ease-in-out;
     }
   }
 
@@ -217,7 +248,7 @@ body {
 
         .search-blur {
           position: fixed;
-          z-index: 99;
+          z-index: 97;
           height: 100vh;
           width: 100vw;
           top: 0;
@@ -234,7 +265,7 @@ body {
 
         .search-wrapper {
           position: fixed;
-          z-index: 100;
+          z-index: 98;
           left: 50%;
           top: 42%;
           -webkit-transform: translate(-50%, -50%);
@@ -307,11 +338,10 @@ body {
         .settings-menu {
           position: absolute;
           width: 220px;
-          top: 50px;
-          right: 10px;
+          top: 55px;
+          right: 0px;
           border: 1px solid #dadce0;
           border-radius: $border-radius-sm;
-          box-shadow: $box-shadow;
 
           .settings-option {
             padding: 8px 16px;
@@ -321,6 +351,86 @@ body {
       }
     }
   }
+}
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
 
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes slide-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-moz-keyframes slide-down {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20%);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slide-left {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20%);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+
+@-moz-keyframes slide-left {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(20%);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
 }

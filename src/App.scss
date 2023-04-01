@@ -351,6 +351,19 @@ body {
       }
     }
   }
+
+  .add-website-modal {
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .input-wrapper {
+      input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
 }
 
 @keyframes fade-in {

@@ -22,7 +22,7 @@ const Modal = (props) => {
 
     return (
         <div ref={background} className="modal-background" onClick={handleHideModal}>
-            <div ref={modal} className="modal">
+            <div ref={modal} className="modal" onClick={e => e.stopPropagation()}>
                 { props.children }
             </div>
         </div>

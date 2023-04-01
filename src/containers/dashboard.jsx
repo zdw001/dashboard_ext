@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopNav from '../components/topNav';
 import { user, sea, gun } from '../utils/gun';
-import AddWebsiteModal from '../components/modal';
+import AddWebsiteModal from '../components/addWebsiteModal';
 
 const Dashboard = ({ navigate }) => {
     // const [txt, setTxt] = useState();
@@ -41,21 +41,9 @@ const Dashboard = ({ navigate }) => {
     };
 
     const fetchUserData = async () => {
-        console.log('fetchUserData')
         let keyPair = user._.sea;
-
-        console.log('keyPair: ')
-        console.log(keyPair)
-
         let encryptedUserData = await gun.user(keyPair.pub);
-
-        console.log("encryptedUserData")
-        console.log(encryptedUserData)
-
         let userData = await sea.decrypt(encryptedUserData.user, keyPair);
-
-        console.log('setting data!')
-        console.log(userData)
 
         setData(userData);
     };
@@ -70,7 +58,7 @@ const Dashboard = ({ navigate }) => {
                     </div>
                 ) : (
                     <div>
-                        { showAddWebiste && <AddWebsiteModal hideModal={() => setShowAddWebsite(false)}/>}
+                        { showAddWebiste && <AddWebsiteModal hideModal={() => setShowAddWebsite(false)} />}
                     </div>
                 )
             }

@@ -8,7 +8,6 @@ import Modal from './modal';
 const AddWebsiteModal = (props) => {
     return (
         <Modal {...props}>
-            Add website
             <h1 className="text-large">Add Website</h1>
         </Modal>
     );

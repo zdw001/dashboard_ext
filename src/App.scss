@@ -56,6 +56,17 @@ body {
       line-height: 6ex;
       padding: 0 1rem;
     }
+    
+    textarea {
+      border: 1px solid gray;
+      border-radius: $border-radius;
+      position: relative;
+      width: 260px;
+      height: 140px;
+      margin: 10px 0;
+      line-height: 6ex;
+      padding: 0 1rem;
+    }
 
     label {
       position: absolute;
@@ -377,6 +388,11 @@ body {
 
     .input-wrapper {
       input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      textarea {
         width: 100%;
         box-sizing: border-box;
       }

@@ -353,8 +353,26 @@ body {
   }
 
   .add-website-modal {
-    .header {
+    .row {
+      display: flex;
+      align-items: center; 
       margin-bottom: 2rem;
+
+      .website-logo-wrapper {
+        height: 50px;
+        width: 50px;
+        border-radius: 25px;
+        display: inline-block;
+        margin-right: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          color: $color-white;
+          font-size: 1.6rem;
+        }
+      }
     }
 
     .input-wrapper {

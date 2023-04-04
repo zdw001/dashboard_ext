@@ -9,18 +9,37 @@ const AddWebsiteModal = (props) => {
     const [websiteName, setWebsiteName] = useState("");
     const [websiteLink, setWebsiteLink] = useState("");
 
+    const generateRandomLogo = (str) => {
+        let hash = 0;
+        let color = '#';
+
+        for (let i=0; i < str.length; i++) {
+          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        for (let i=0; i < 3; i++) {
+          var value = (hash >> (i * 8)) & 0xFF;
+          color += ('00' + value.toString(16)).substr(-2);
+        }
+
+        return color;
+    };
 
     return (
         <Modal {...props}>
             <div className='add-website-modal'>
-                <div className='website-logo-wrapper'>
-
+                <div className='row'>
+                    <div className='website-logo-wrapper'
+                        style={{backgroundColor: generateRandomLogo(websiteName)}} 
+                    >
+                        <span>{websiteName.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <input className="text-large font-bold" 
+                        placeholder="Website Name"
+                        value={websiteName} 
+                        onChange={e => setWebsiteName(e.target.value)}
+                    />
                 </div>
-                <input className="text-large font-bold header" 
-                    placeholder="Website Name"
-                    value={websiteName} 
-                    onChange={e => setWebsiteName(e.target.value)}
-                />
                 <div className='input-wrapper'>
                     <input value={websiteLink} onChange={e => setWebsiteLink(e.target.value)}/>
                     <label>Website Link</label>

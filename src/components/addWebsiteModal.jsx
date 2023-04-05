@@ -2,8 +2,6 @@ import { useState } from "react";
 import { user } from '../utils/gun';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
-import Modal from './modal';
-
 
 const AddWebsiteModal = (props) => {
     const [websiteName, setWebsiteName] = useState("");
@@ -27,31 +25,32 @@ const AddWebsiteModal = (props) => {
     };
 
     return (
-        <Modal {...props}>
-            <div className='add-website-modal'>
-                <div className='row'>
-                    <div className='website-logo-wrapper'
-                        style={{backgroundColor: generateRandomLogo(websiteName)}} 
-                    >
-                        <span>{websiteName.charAt(0).toUpperCase()}</span>
-                    </div>
-                    <input className="text-large font-bold" 
-                        placeholder="Website Name"
-                        value={websiteName} 
-                        onChange={e => setWebsiteName(e.target.value)}
-                    />
+        <div className='add-website-modal'>
+            <div className='row'>
+                <div className='website-logo-wrapper'
+                    style={{backgroundColor: generateRandomLogo(websiteName)}} 
+                >
+                    <span>{websiteName.charAt(0).toUpperCase()}</span>
                 </div>
-                <div className='input-wrapper'>
-                    <input value={websiteLink} onChange={e => setWebsiteLink(e.target.value)}/>
-                    <label>Website Link</label>
-                </div>
-                <div className='input-wrapper'>
-                    <textarea value={websiteNotes} onChange={e => setWebsiteNotes(e.target.value)}/>
-                    <label>Notes</label>
-                </div>
+                <input className="text-large font-bold" 
+                    placeholder="Website Name"
+                    value={websiteName} 
+                    onChange={e => setWebsiteName(e.target.value)}
+                />
             </div>
-        </Modal>
-
+            <div className='input-wrapper'>
+                <input value={websiteLink} onChange={e => setWebsiteLink(e.target.value)}/>
+                <label>Website Link</label>
+            </div>
+            <div className='input-wrapper'>
+                <textarea value={websiteNotes} onChange={e => setWebsiteNotes(e.target.value)}/>
+                <label>Notes</label>
+            </div>
+            <div className="buttons">
+                <div className="btn" onClick={props.handleHideModal}>Cancel</div>
+                <div className="btn">Save</div>
+            </div>
+        </div>
     );
 }
 

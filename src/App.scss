@@ -66,6 +66,10 @@ body {
       margin: 10px 0;
       line-height: 6ex;
       padding: 0 1rem;
+      resize: none;
+      font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
     }
 
     label {
@@ -395,6 +399,16 @@ body {
       textarea {
         width: 100%;
         box-sizing: border-box;
+      }
+    }
+
+    .buttons {
+      float: right;
+
+      .btn {
+        width: 80px !important;
+        margin-top: 10px;
+        margin-left: 10px;
       }
     }
   }

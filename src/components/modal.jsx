@@ -1,11 +1,7 @@
-import { useRef } from "react";
-import { user } from '../utils/gun';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import React, { useRef } from "react";
 
-const Modal = (props) => {
-    console.log(props)
-    console.log(props.children)
+const Modal = ({hideModal, children}) => {
+    console.log(children)
     const background = useRef();
     const modal = useRef();
 
@@ -16,14 +12,23 @@ const Modal = (props) => {
         background.current.style.opacity = 0;
 
         setTimeout(function() {
-            props.hideModal()
+            hideModal()
         }, 400);
     };
+
+    const renderChildren = () => {
+        return React.Children.map(children, (child) => {
+          return React.cloneElement(child, {
+            handleHideModal: handleHideModal,
+          });
+        });
+      };
+    
 
     return (
         <div ref={background} className="modal-background" onClick={handleHideModal}>
             <div ref={modal} className="modal" onClick={e => e.stopPropagation()}>
-                { props.children }
+                { renderChildren() }
             </div>
         </div>
     );

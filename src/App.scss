@@ -276,6 +276,25 @@ body {
             opacity: 0;
             z-index: -1;
           }
+
+          .background {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-color: #282A35;
+
+            .star {
+              height: 2px;
+              width: 2px;
+              position: absolute;
+              border-radius: 12px;
+              box-shadow: 0 0 5px 0.5px rgba($color: $color-white, $alpha: 0.5);
+              animation-duration: 3s;
+              animation-name: twinkle;
+              animation-iteration-count: infinite;
+              animation-direction: alternate;
+            }
+          }
         }
 
         .search-wrapper {
@@ -291,6 +310,7 @@ body {
           padding: 1px 75px;
           width: 320px;
           height: 66px;
+          background-color: $color-white;
 
           &.show-dashboard {
             border-radius: 22px;
@@ -494,4 +514,22 @@ body {
     opacity: 1;
     -moz-transform: translateX(0);
   }
+}
+
+@keyframes twinkle {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(0.5); }
+}
+
+@-webkit-keyframes twinkle {
+  0% { -webkit-transform: scale(0.5); }
+  50% { -webkit-transform: scale(1.5); }
+  100% { -webkit-transform: scale(0.5); }
+}
+
+@-moz-keyframes twinkle {
+  0% { -moz-transform: scale(0.5); }
+  50% { -moz-transform: scale(1.5); }
+  100% { -moz-transform: scale(0.5); }
 }

@@ -3,6 +3,7 @@ import { user } from '../utils/gun';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import SettingsMenu from '../components/settingsMenu';
+import SearchBackground from './background';
 
 
 
@@ -19,7 +20,9 @@ const TopNav = ({setShowAddWebsite}) => {
                 </div>
             </div>
             <div className="search">
-                <div className={showDashboard ? "search-blur show-dashboard" : "search-blur"} onClick={() => setShowDashboard(true)}></div>
+                <div className={showDashboard ? "search-blur show-dashboard" : "search-blur"} onClick={() => setShowDashboard(true)}>
+                    <SearchBackground />
+                </div>
                 <div className={showDashboard ? 'search-wrapper show-dashboard' : 'search-wrapper'}>
                     <FontAwesomeIcon className='search-icon icon-sm' icon={icon({ name: 'search' })} />
                     <input

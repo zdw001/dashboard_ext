@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { user } from '../utils/gun';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const AddWebsiteModal = (props) => {
     const [websiteName, setWebsiteName] = useState("");
@@ -22,6 +20,10 @@ const AddWebsiteModal = (props) => {
         }
 
         return color;
+    };
+
+    const handleSaveWebsite = () => {
+
     };
 
     return (
@@ -48,7 +50,7 @@ const AddWebsiteModal = (props) => {
             </div>
             <div className="buttons">
                 <div className="btn" onClick={props.handleHideModal}>Cancel</div>
-                <div className="btn">Save</div>
+                <div className="btn" onClick={handleSaveWebsite}>Save</div>
             </div>
         </div>
     );

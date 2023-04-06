@@ -1,3 +1,4 @@
+import Astronaut from "./astronaut";
 
 const SearchBackground = () => {
   const getRandomNumber = (min, max) => {
@@ -11,11 +12,13 @@ const SearchBackground = () => {
   
   return (
     <div className="background">
+      <Astronaut getRandomNumber={getRandomNumber}/>
       {
         [...Array(200)].map((e, i) => {
           let size = `${getRandomNumber(0.5, 2)}px`;
           return (
             <div className="star" 
+              key={i}
               style={{
                 top: `${getRandomNumber(0, 100)}%`, 
                 left: `${getRandomNumber(0, 100)}%`, 

@@ -23,6 +23,8 @@ body {
   $border-radius-sm: 2px;
   $border-radius: 6px;
   $border-radius-lg: 16px;
+  height: 100vh;
+  width: 100vw;
 
   margin: 0;
   font-family: 'Roboto', 'Oxygen',
@@ -294,6 +296,19 @@ body {
               animation-iteration-count: infinite;
               animation-direction: alternate;
             }
+
+            .astronaut {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 99;
+              height: 100px;
+              transition: 6s all linear;
+              animation-name: spin;
+              animation-duration: 6000ms;
+              animation-iteration-count: infinite;
+              animation-timing-function: linear; 
+            }
           }
         }
 
@@ -532,4 +547,31 @@ body {
   0% { -moz-transform: scale(0.5); }
   50% { -moz-transform: scale(1.5); }
   100% { -moz-transform: scale(0.5); }
+}
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform:rotate(0deg);
+  }
+  to {
+    -webkit-transform:rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform:rotate(0deg);
+  }
+  to {
+    -moz-transform:rotate(360deg);
+  }
 }

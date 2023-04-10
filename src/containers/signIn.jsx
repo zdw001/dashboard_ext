@@ -3,6 +3,7 @@ import {
     validateEmail
 } from '../utils/general';
 import {
+    gun,
     user
 } from '../utils/gun';
 
@@ -13,7 +14,9 @@ const SignIn = ({ navigate }) => {
     const [formError, setFormError] = useState(false);
 
     useEffect(() => {
-
+        gun.get('zachwinters1@gmail.com').once(function(response) {
+            console.log(response)
+        })
     }, [])
 
     useEffect(() => {

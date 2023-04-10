@@ -36,11 +36,11 @@ const Dashboard = ({ navigate }) => {
         fetchUserData();
     }, []);
 
-    const handleUpdateData = async () => {
-        let encryptedUserData = await sea.encrypt(data, user._.sea);
+    // const handleUpdateData = async () => {
+    //     let encryptedUserData = await sea.encrypt(data, user._.sea);
 
-        await user.get('user').put(encryptedUserData);
-    };
+    //     await user.get('user').put(encryptedUserData);
+    // };
 
     const fetchUserData = async () => {
         let keyPair = user._.sea;
@@ -52,7 +52,7 @@ const Dashboard = ({ navigate }) => {
 
     return (
         <div className="dashboard">
-            <TopNav setShowAddWebsite={setShowAddWebsite}/>
+            <TopNav setShowAddWebsite={setShowAddWebsite} navigate={navigate} />
             {
                 data === null ? (
                     <div className="loading">
@@ -62,7 +62,7 @@ const Dashboard = ({ navigate }) => {
                     <div>
                         { showAddWebiste && 
                             <Modal hideModal={() => setShowAddWebsite(false)}>
-                                <AddWebsiteModal  />
+                                <AddWebsiteModal />
                             </Modal>
                         }
                     </div>

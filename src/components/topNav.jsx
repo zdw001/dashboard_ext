@@ -7,7 +7,7 @@ import SearchBackground from './background';
 
 
 
-const TopNav = ({setShowAddWebsite}) => {
+const TopNav = ({setShowAddWebsite, navigate}) => {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showDashboard, setShowDashboard] = useState(false)
 
@@ -41,7 +41,7 @@ const TopNav = ({setShowAddWebsite}) => {
                     onClick={() => setShowSettingsMenu(prev => !prev)}
                 />
                 {
-                    showSettingsMenu && <SettingsMenu />
+                    showSettingsMenu && <SettingsMenu navigate={navigate} />
                 }
             </div>
             </div>

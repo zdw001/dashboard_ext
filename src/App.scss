@@ -299,15 +299,20 @@ body {
 
             .astronaut {
               position: absolute;
-              top: 0;
-              left: 0;
+              top: -200px;
+              left: -200px;
               z-index: 99;
               height: 100px;
-              transition: 6s all linear;
+              transition: 8s all linear;
               animation-name: spin;
               animation-duration: 6000ms;
               animation-iteration-count: infinite;
               animation-timing-function: linear; 
+
+              img {
+                height: 100px;
+                transition: 8s all linear;
+              }
             }
           }
         }

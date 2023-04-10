@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { user } from '../utils/gun';
+import { sea, user } from '../utils/gun';
+import {
+    generateUuid,
+} from '../utils/general';
 
 const AddWebsiteModal = (props) => {
     const [websiteName, setWebsiteName] = useState("");
@@ -22,8 +25,20 @@ const AddWebsiteModal = (props) => {
         return color;
     };
 
-    const handleSaveWebsite = () => {
+    const handleSaveWebsite = async () => {
+        console.log(props.userData)
+        let new_webiste = {
+            id: generateUuid(),
+            name: websiteName,
+            link: websiteLink,
+            notes: websiteNotes,
+            img: "",
+        };
 
+        props.userData.websites.push(new_webiste);
+
+        // Save to DB
+        let encryptedUserData = await sea.encrypt(props.userData, user._.sea);
     };
 
     return (

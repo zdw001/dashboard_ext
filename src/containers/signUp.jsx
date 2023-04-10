@@ -16,6 +16,9 @@ const SignUp = ({ navigate }) => {
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
+    const signUpUrl = "http://localhost:8080/sign-up";
+    const salt = 10;
+
     useEffect(() => {
         if (usernameError) setUsernameError(false);
     }, [username]);
@@ -24,7 +27,7 @@ const SignUp = ({ navigate }) => {
         if (passwordError) setPasswordError(false);
     }, [password]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
@@ -45,7 +48,23 @@ const SignUp = ({ navigate }) => {
             return;
         }
 
-        user.create(username, password, handleCreateResponse);
+        fetch(signUpUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: username, 
+                password: password
+            })
+        }).then(resp => {
+            console.log('SUCCESS')
+            console.log(resp)
+        }).catch(err => {
+            console.log('ERROR')
+            console.log(err)
+        })
+
+
     };
 
     const handleCreateResponse = async () => {

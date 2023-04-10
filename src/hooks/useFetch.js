@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url, {method = "GET"}) => {
     const [data, setdata] = useState(null);
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState("");
 
     useEffect(() => {
-        fetch(url)
+        fetch(url, {method: method})
             .then((res) => res.json())
             .then((data) => {
                 seterror(data.error)

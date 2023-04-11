@@ -2,22 +2,14 @@ import { useEffect, useState } from 'react';
 import {
     validateEmail
 } from '../utils/general';
-import {
-    gun,
-    user
-} from '../utils/gun';
 
-const SignIn = ({ navigate }) => {
+const SignIn = ({ navigate, userData, setUserData }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [formError, setFormError] = useState(false);
 
-    useEffect(() => {
-        gun.get('zachwinters1@gmail.com').once(function(response) {
-            console.log(response)
-        })
-    }, [])
+    const signInUrl = "http://localhost:8080/sign-in";
 
     useEffect(() => {
         if (formError) setFormError(false);
@@ -40,27 +32,28 @@ const SignIn = ({ navigate }) => {
             return;
         }
 
-        user.auth(username, password, handleCallback)
-    };
+        // user.auth(username, password, handleCallback)
+        fetch(signInUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: username, 
+                password: password
+            })
+        }).then(function(response) {
+            return response.json();
+        }).then(data => {
+            setUserData(data.user)
 
-    const handleCallback = (resp) => {
-        if (resp.err) {
+            navigate("dashboard");
+        }).catch(err => {
+            console.log('ERROR')
+            console.log(err)
+
             setLoading(false);
             setFormError(true);
-            return;
-        }
-
-        setTimeout(() => {
-            saveToLocalStorage();
-        }, 500);
-
-        navigate("dashboard");
-    };
-
-    const saveToLocalStorage = () => {
-        let pair = sessionStorage.getItem('pair');
-
-        localStorage.setItem('pair', pair)
+        });
     };
 
     const getErrorMsg = () => {

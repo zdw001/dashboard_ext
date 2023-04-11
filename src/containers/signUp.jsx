@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
-    generateUuid,
     validateEmail,
     validatePassword
 } from '../utils/general';
-import {
-    sea,
-    user
-} from '../utils/gun';
 
-const SignUp = ({ navigate }) => {
+const SignUp = ({ navigate, userData, setUserData }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -56,44 +51,16 @@ const SignUp = ({ navigate }) => {
                 username: username, 
                 password: password
             })
-        }).then(resp => {
-            console.log('SUCCESS')
-            console.log(resp)
+        }).then(function(response) {
+            return response.json();
+        }).then(data => {
+            setUserData(data.user);
+
+            navigate("dashboard");
         }).catch(err => {
             console.log('ERROR')
             console.log(err)
-        })
-
-
-    };
-
-    const handleCreateResponse = async () => {
-        user.auth(username, password, handleAuthResponse);
-    };
-
-    const handleAuthResponse = (resp) => {
-        console.log('auth resp:')
-        console.log(resp)
-        if (resp.err) {
-            setLoading(false);
-            setUsername("");
-            setPassword("");
-            return;
-        }
-
-        createUserObject();
-
-        setTimeout(() => {
-            saveToLocalStorage();
-        }, 500);
-
-        navigate("dashboard");
-    };
-
-    const saveToLocalStorage = () => {
-        let pair = sessionStorage.getItem('pair');
-
-        localStorage.setItem('pair', pair)
+        });
     };
 
     const getErrorMsg = () => {
@@ -102,23 +69,6 @@ const SignUp = ({ navigate }) => {
         if (passwordError) return <div className="error">invalid password.</div>;
         else return <div className="error"></div>;
     };
-
-    const createUserObject = async () => {
-        let userData = {
-            id: generateUuid(),
-            username: username,
-            profile: {},
-            settings: {},
-            websites: [],
-            createdAt: Date.now()
-        };
-
-        let encryptedUserData = await sea.encrypt(userData, user._.sea);
-
-        await user.get('user').put(encryptedUserData);
-
-        return;
-    }
 
     return (
         <div className="content">

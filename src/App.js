@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react';
 import Dashboard from './containers/dashboard';
 import SignIn from './containers/signIn';
 import SignUp from './containers/signUp';
-import {
-  user
-} from './utils/gun';
-
 
 function App() {
   const [page, setPage] = useState(null);
@@ -17,18 +13,19 @@ function App() {
   }, []);
 
   const handleSession = () => {
-    if (user.is) setPage("dashboard");
+    // TODO
+    if (userData) setPage("dashboard");
     else setPage("sign-in");
   }
 
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard navigate={setPage} />
+        return <Dashboard userData={userData} setUserData={setUserData} navigate={setPage} />
       case "sign-up":
-        return <SignUp navigate={setPage} />
+        return <SignUp userData={userData} setUserData={setUserData} navigate={setPage} />
       case "sign-in":
-        return <SignIn navigate={setPage} />
+        return <SignIn userData={userData} setUserData={setUserData} navigate={setPage} />
       default:
         return
     }

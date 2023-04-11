@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { sea, user } from '../utils/gun';
 import {
     generateUuid,
 } from '../utils/general';
@@ -38,7 +37,6 @@ const AddWebsiteModal = (props) => {
         props.userData.websites.push(new_webiste);
 
         // Save to DB
-        let encryptedUserData = await sea.encrypt(props.userData, user._.sea);
     };
 
     return (

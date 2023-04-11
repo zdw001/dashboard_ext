@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+    setCookie,
     validateEmail,
     validatePassword
 } from '../utils/general';
@@ -54,6 +55,7 @@ const SignUp = ({ navigate, userData, setUserData }) => {
         }).then(function(response) {
             return response.json();
         }).then(data => {
+            setCookie('token', data.token, 365);
             setUserData(data.user);
 
             navigate("dashboard");

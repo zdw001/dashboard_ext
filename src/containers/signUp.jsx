@@ -47,7 +47,10 @@ const SignUp = ({ navigate, userData, setUserData }) => {
         fetch(signUpUrl, {
             method: 'POST',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 username: username, 
                 password: password
@@ -55,7 +58,7 @@ const SignUp = ({ navigate, userData, setUserData }) => {
         }).then(function(response) {
             return response.json();
         }).then(data => {
-            setCookie('token', data.token, 365);
+            localStorage.setItem('token', data.token);
             setUserData(data.user);
 
             navigate("dashboard");

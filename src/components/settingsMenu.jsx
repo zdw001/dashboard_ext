@@ -1,9 +1,8 @@
 const SettingsMenu = ({ navigate }) => {
 
-    const handleSignOut = () => {
-        // TODO
-
-        // navigate("sign-in");
+    const handleSignOut = () => {  
+        localStorage.clear();
+        window.location.reload();
     };
 
     return (

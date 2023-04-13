@@ -424,7 +424,8 @@ body {
           box-sizing: border-box;
 
           .tile-content {
-            border: 1px solid black;
+            border: 1px solid $color-gray-200;
+            background-color: $color-gray-100;
             height: 100%;
             border-radius: $border-radius-lg;
             padding: 10px;
@@ -432,15 +433,15 @@ body {
             text-align: center;
 
             .website-logo-wrapper {
-              height: 50px;
-              width: 50px;
-              border-radius: 25px;
+              height: 70px;
+              width: 70px;
+              border-radius: 35px;
               display: inline-block;
               margin-right: 25px;
               display: flex;
               justify-content: center;
               align-items: center;
-              margin: 30px auto 20px;
+              margin: 30px auto 12px;
 
               span {
                 color: $color-white;
@@ -450,7 +451,7 @@ body {
 
             .tile-name {
               font-size: 1.25rem;
-              margin-bottom: 4px;
+              margin-bottom: 2px;
             }
 
             .tile-username {

@@ -3,7 +3,7 @@ import {
     generateUuid,
 } from '../utils/general';
 
-const AddWebsiteModal = (props) => {
+const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
     const [websiteName, setWebsiteName] = useState("");
     const [websiteLink, setWebsiteLink] = useState("");
     const [websiteNotes, setWebsiteNotes] = useState("");
@@ -25,8 +25,8 @@ const AddWebsiteModal = (props) => {
     };
 
     const handleSaveWebsite = async () => {
-        console.log(props.userData)
-        let new_webiste = {
+        console.log(userData)
+        let new_website = {
             id: generateUuid(),
             name: websiteName,
             link: websiteLink,
@@ -34,9 +34,37 @@ const AddWebsiteModal = (props) => {
             img: "",
         };
 
-        props.userData.websites.push(new_webiste);
+        let updatedUserData = userData;
+
+        updatedUserData.websites.push(new_website)
+        setUserData(updatedUserData);
+
+        console.log('ADD WEBSITE')
 
         // Save to DB
+        fetch('http://localhost:8080/add-website', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                website: new_website
+            })
+        }).then(function(response) {
+            return response.json();
+        }).then(data => {
+            // SUCCESS
+            setUserData(data.user);
+
+            handleHideModal();
+        }).catch(err => {
+            console.log('ERROR')
+            console.log(err)
+
+            // TODO: REVERT DATA
+        });
     };
 
     return (
@@ -62,7 +90,7 @@ const AddWebsiteModal = (props) => {
                 <label>Notes</label>
             </div>
             <div className="buttons">
-                <div className="btn" onClick={props.handleHideModal}>Cancel</div>
+                <div className="btn" onClick={handleHideModal}>Cancel</div>
                 <div className="btn" onClick={handleSaveWebsite}>Save</div>
             </div>
         </div>

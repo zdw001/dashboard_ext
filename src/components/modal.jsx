@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 
-const Modal = ({hideModal, children}) => {
-    console.log(children)
+const Modal = ({hideModal, children, userData, setUserData}) => {
     const background = useRef();
     const modal = useRef();
 
@@ -20,6 +19,8 @@ const Modal = ({hideModal, children}) => {
         return React.Children.map(children, (child) => {
           return React.cloneElement(child, {
             handleHideModal: handleHideModal,
+            userData: userData,
+            setUserData: setUserData
           });
         });
       };

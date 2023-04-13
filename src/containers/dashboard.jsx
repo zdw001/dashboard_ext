@@ -10,12 +10,6 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
     useEffect(() => {
     }, []);
 
-    // const handleUpdateData = async () => {
-    //     let encryptedUserData = await sea.encrypt(data, user._.sea);
-
-    //     await user.get('user').put(encryptedUserData);
-    // };
-
     return (
         <div className="dashboard">
             <TopNav setShowAddWebsite={setShowAddWebsite} navigate={navigate} />
@@ -27,10 +21,25 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                 ) : (
                     <div>
                         { showAddWebiste && 
-                            <Modal hideModal={() => setShowAddWebsite(false)}>
-                                <AddWebsiteModal />
+                            <Modal hideModal={() => setShowAddWebsite(false)} userData={userData} setUserData={setUserData}>
+                                <AddWebsiteModal/>
                             </Modal>
                         }
+                        <div className="tile-container">
+                            <div className="tile-grid">
+                            {
+                                userData.websites.map(website => {
+                                    return (
+                                        <div className="tile">
+                                            {website.name}
+
+                                        </div>
+                                    )
+                                })
+                            }
+                            </div>
+                        
+                        </div>
                     </div>
                 )
             }

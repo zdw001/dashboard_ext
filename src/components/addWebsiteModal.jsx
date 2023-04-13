@@ -1,35 +1,25 @@
 import { useState } from "react";
 import {
-    generateUuid,
+    generateUuid, simpleEncrypt, generateRandomLogo
 } from '../utils/general';
 
 const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
     const [websiteName, setWebsiteName] = useState("");
     const [websiteLink, setWebsiteLink] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [websiteNotes, setWebsiteNotes] = useState("");
-
-    const generateRandomLogo = (str) => {
-        let hash = 0;
-        let color = '#';
-
-        for (let i=0; i < str.length; i++) {
-          hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-
-        for (let i=0; i < 3; i++) {
-          var value = (hash >> (i * 8)) & 0xFF;
-          color += ('00' + value.toString(16)).substr(-2);
-        }
-
-        return color;
-    };
 
     const handleSaveWebsite = async () => {
         console.log(userData)
+
+        console.log(simpleEncrypt('test123'))
         let new_website = {
             id: generateUuid(),
             name: websiteName,
             link: websiteLink,
+            username: username,
+            password: simpleEncrypt(password),
             notes: websiteNotes,
             img: "",
         };
@@ -84,6 +74,16 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
             <div className='input-wrapper'>
                 <input value={websiteLink} onChange={e => setWebsiteLink(e.target.value)}/>
                 <label>Website Link</label>
+            </div>
+            <div className="input-row">
+                <div className='input-wrapper'>
+                    <input value={username} onChange={e => setUsername(e.target.value)}/>
+                    <label>Username</label>
+                </div>
+                <div className='input-wrapper'>
+                    <input value={password} onChange={e => setPassword(e.target.value)}/>
+                    <label>Password</label>
+                </div>
             </div>
             <div className='input-wrapper'>
                 <textarea value={websiteNotes} onChange={e => setWebsiteNotes(e.target.value)}/>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import TopNav from '../components/topNav';
 import AddWebsiteModal from '../components/addWebsiteModal';
 import Modal from '../components/modal';
+import Tile from '../components/tile';
 
 
 const Dashboard = ({ navigate, userData, setUserData }) => {
@@ -30,10 +31,7 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                             {
                                 userData.websites.map(website => {
                                     return (
-                                        <div className="tile">
-                                            {website.name}
-
-                                        </div>
+                                        <Tile website={website}/>
                                     )
                                 })
                             }

@@ -1,3 +1,5 @@
+import AES from 'crypto-js/aes';
+
 const validateEmail = (email) => {
     return String(email)
         .toLowerCase()
@@ -19,8 +21,36 @@ const generateUuid = () => {
     );
 };
 
+const simpleEncrypt = (str) => {
+    return AES.encrypt(str, "superdupersecret123");
+}
+
+const simpleDecrypt = (str) => {
+    return AES.decrypt(str, "superdupersecret123");
+}
+
+const generateRandomLogo = (str) => {
+    let hash = 0;
+    let color = '#';
+
+    for (let i=0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    for (let i=0; i < 3; i++) {
+      var value = (hash >> (i * 8)) & 0xFF;
+      color += ('00' + value.toString(16)).substr(-2);
+    }
+
+    return color;
+};
+
+
 export {
     validateEmail,
     validatePassword,
     generateUuid,
+    simpleEncrypt,
+    simpleDecrypt,
+    generateRandomLogo
 }

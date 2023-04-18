@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { generateRandomLogo } from "../utils/general";
+import { FaEllipsisH, FaCopy } from 'react-icons/fa';
+import TileSettings from "./tileSettings";
 
 const Tile = ({website}) => {
+  const [showTileSettings, setShowTileSettings] = useState(false);
     return (
       <div className="tile-wrapper">
           <div className="tile-content">
+              <div className="tile-actions">
+                <FaCopy className="icon" />
+                <FaEllipsisH className="icon" onClick={() => setShowTileSettings(true)}/>
+                {
+                  showTileSettings && <TileSettings />
+                }
+              </div>
               {
                 website.img ? (
                   <img ref={website.img} alt="tile" /> 

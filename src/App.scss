@@ -1,31 +1,33 @@
+$color-primary-100: #cccccc;
+$color-primary-200: #b3b3b3;
+$color-primary-300: #999999;
+$color-primary-400: #808080;
+$color-primary-500: #666666;
+$color-primary-600: #4d4d4d;
+$color-primary-700: #333333;
+$color-white: #ffffff;
+$color-gray-100: #f8f8f8;
+$color-gray-150: #e9e9e9;
+$color-gray-200: #cccccc;
+$color-gray-300: #a6a6a6;
+$color-gray-400: #808080;
+$color-gray-500: #666666;
+$color-gray-600: #4d4d4d;
+$color-gray-700: #333333;
+$color-gray-800: #1a1a1a;
+$red: #FF5733;
+$box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
+rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+$box-shadow-dark: rgba(60, 64, 67, 0.8) 0px 1px 2px 0,
+rgba(60, 64, 67, 0.4) 0px 2px 6px 2px;
+$border-radius-sm: 2px;
+$border-radius: 6px;
+$border-radius-lg: 16px;
+
+
 body {
-  $color-primary-100: #cccccc;
-  $color-primary-200: #b3b3b3;
-  $color-primary-300: #999999;
-  $color-primary-400: #808080;
-  $color-primary-500: #666666;
-  $color-primary-600: #4d4d4d;
-  $color-primary-700: #333333;
-  $color-white: #ffffff;
-  $color-gray-100: #f8f8f8;
-  $color-gray-200: #cccccc;
-  $color-gray-300: #a6a6a6;
-  $color-gray-400: #808080;
-  $color-gray-500: #666666;
-  $color-gray-600: #4d4d4d;
-  $color-gray-700: #333333;
-  $color-gray-800: #1a1a1a;
-  $red: #FF5733;
-  $box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
-  rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  $box-shadow-dark: rgba(60, 64, 67, 0.8) 0px 1px 2px 0,
-  rgba(60, 64, 67, 0.4) 0px 2px 6px 2px;
-  $border-radius-sm: 2px;
-  $border-radius: 6px;
-  $border-radius-lg: 16px;
   height: 100vh;
   width: 100vw;
-
   margin: 0;
   font-family: 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -391,22 +393,51 @@ body {
 
         .settings-menu {
           position: absolute;
-          width: 220px;
+          width: 280px;
           top: 55px;
           right: 0px;
-          border: 1px solid #dadce0;
-          border-radius: $border-radius-sm;
+          z-index: 2;
+
+          .settings-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid $color-gray-150;
+            padding: 12px 16px;
+            width: 100%;
+            box-sizing: border-box;
+
+            .profile-logo-wrapper {
+              height: 40px;
+              width: 40px;
+              border-radius: 20px;
+              display: inline-block;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-right: 10px;
+
+              span {
+                color: $color-white;
+                font-size: 1.2rem;
+              }
+            }
+
+            .settings-username {
+              font-size: 0.85rem;
+              font-weight: 400;
+            }
+          }
 
           .settings-option {
-            padding: 8px 16px;
-            padding: 8px 16px;
+            padding: 10px 24px;
           }
         }
       }
     }
 
     .tile-container {
-      margin: 30px auto;
+      margin: 30px 3rem;
 
       .tile-grid {
         display: flex;
@@ -424,6 +455,7 @@ body {
           box-sizing: border-box;
 
           .tile-content {
+            position: relative;
             border: 1px solid $color-gray-200;
             background-color: $color-gray-100;
             height: 100%;
@@ -431,6 +463,41 @@ body {
             padding: 10px;
             box-sizing: border-box;
             text-align: center;
+            overflow: hidden;
+
+            &:hover {
+              .tile-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
+            }
+
+            .tile-actions {
+              display: none;
+              position: absolute;
+              width: 100%;
+              top: 0;
+              left: 0;
+
+              .icon {
+                padding: 16px 18px;
+                color: $color-gray-200;
+
+                &:hover {
+                  cursor: pointer;
+                  color: $color-gray-300;
+                }
+              }
+
+              .tile-settings {
+                position: absolute;
+                width: 280px;
+                top: 55px;
+                right: 0px;
+                z-index: 2;
+              }
+            }
 
             .website-logo-wrapper {
               height: 70px;
@@ -534,6 +601,22 @@ body {
         margin-left: 10px;
       }
     }
+  }
+}
+
+.drop-down-list-container {
+  width: 100%;
+  z-index: 2;
+  box-shadow: $box-shadow;
+  border-radius: 20px;
+  padding: 6px;
+  background-color: $color-gray-150;
+  box-sizing: border-box;
+
+  .drop-down-list-content {
+    width: 100%;
+    border-radius: 16px;
+    background-color: $color-white;
   }
 }
 

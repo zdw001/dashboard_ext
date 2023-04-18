@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopNav from '../components/topNav';
 import AddWebsiteModal from '../components/addWebsiteModal';
-import Modal from '../components/modal';
+import Modal from '../elements/modal';
 import Tile from '../components/tile';
 
 
@@ -13,7 +13,7 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
 
     return (
         <div className="dashboard">
-            <TopNav setShowAddWebsite={setShowAddWebsite} navigate={navigate} />
+            <TopNav setShowAddWebsite={setShowAddWebsite} navigate={navigate} userData={userData} />
             {
                 userData === null ? (
                     <div className="loading">
@@ -31,7 +31,7 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                             {
                                 userData.websites.map(website => {
                                     return (
-                                        <Tile website={website}/>
+                                        <Tile key={website.id} website={website}/>
                                     )
                                 })
                             }

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import SettingsMenu from '../components/settingsMenu';
 import SearchBackground from './background';
+import { FaCog, FaSearch, FaPlus } from 'react-icons/fa';
 
 
 
-const TopNav = ({setShowAddWebsite, navigate}) => {
+
+const TopNav = ({setShowAddWebsite, navigate, userData}) => {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showDashboard, setShowDashboard] = useState(false)
 
@@ -14,7 +14,7 @@ const TopNav = ({setShowAddWebsite, navigate}) => {
         <div className="top-nav">
             <div>
                 <div className="nav-icon-wrapper" onClick={setShowAddWebsite}>
-                    <FontAwesomeIcon className="nav-icon icon-md" icon={icon({ name: "plus" })} />
+                    <FaPlus className="nav-icon icon-md" />
                     <div className="label text-small">Add Website</div>
                 </div>
             </div>
@@ -23,7 +23,7 @@ const TopNav = ({setShowAddWebsite, navigate}) => {
                     <SearchBackground />
                 </div>
                 <div className={showDashboard ? 'search-wrapper show-dashboard' : 'search-wrapper'}>
-                    <FontAwesomeIcon className='search-icon icon-sm' icon={icon({ name: 'search' })} />
+                    <FaSearch className='search-icon icon-sm' />
                     <input
                         type="text"
                         placeholder="Search command center"
@@ -34,13 +34,10 @@ const TopNav = ({setShowAddWebsite, navigate}) => {
             <div className="settings">
              <div className="nav-icon-wrapper">
                 <div className='label text-small'>Settings</div>
-                <FontAwesomeIcon
-                    className='nav-icon icon-md'
-                    icon={icon({ name: 'cog' })}
-                    onClick={() => setShowSettingsMenu(prev => !prev)}
-                />
+                <FaCog className='nav-icon icon-md'
+                    onClick={() => setShowSettingsMenu(prev => !prev)}/>
                 {
-                    showSettingsMenu && <SettingsMenu navigate={navigate} />
+                    showSettingsMenu && <SettingsMenu navigate={navigate} userData={userData}/>
                 }
             </div>
             </div>

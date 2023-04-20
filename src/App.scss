@@ -559,17 +559,17 @@ body {
         }
 
         @media(max-width: 1073px) {
-          .tile {
+          .tile-wrapper {
             flex-basis: 33.33%;
           }
         }
         @media(max-width: 815px) {
-          .tile {
+          .tile-wrapper {
             flex-basis: 50%;
           }
         }
         @media(max-width: 555px) {
-          .tile {
+          .tile-wrapper {
             flex-basis: 100%;
           }
         }

@@ -3,9 +3,6 @@ import SettingsMenu from '../components/settingsMenu';
 import SearchBackground from './background';
 import { FaCog, FaSearch, FaPlus } from 'react-icons/fa';
 
-
-
-
 const TopNav = ({setShowAddWebsite, navigate, userData}) => {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showDashboard, setShowDashboard] = useState(false)

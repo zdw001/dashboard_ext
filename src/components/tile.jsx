@@ -3,10 +3,8 @@ import { generateRandomLogo } from "../utils/general";
 import { FaEllipsisH, FaCopy } from 'react-icons/fa';
 import TileSettings from "./tileSettings";
 
-const Tile = ({website}) => {
+const Tile = ({website, setUserData}) => {
   const [showTileSettings, setShowTileSettings] = useState(false);
-
-  console.log('showTileSettings: ', showTileSettings)
 
   return (
     <div className="tile-wrapper">
@@ -16,7 +14,7 @@ const Tile = ({website}) => {
               <FaEllipsisH className="icon" onClick={() => setShowTileSettings(true)}/>
             </div>
             {
-              showTileSettings && <TileSettings hideMenu={() => setShowTileSettings(false)}/>
+              showTileSettings && <TileSettings website_id={website.id} hideMenu={() => setShowTileSettings(false)} setUserData={setUserData}/>
             }
             {
               website.img ? (

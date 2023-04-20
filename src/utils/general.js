@@ -22,11 +22,11 @@ const generateUuid = () => {
 };
 
 const simpleEncrypt = (str) => {
-    return AES.encrypt(str, "superdupersecret123");
+    return AES.encrypt(str, "superdupersecret123").toString();
 }
 
 const simpleDecrypt = (str) => {
-    return AES.decrypt(str, "superdupersecret123");
+    return AES.decrypt(str, "superdupersecret123").toString();
 }
 
 const generateRandomLogo = (str) => {

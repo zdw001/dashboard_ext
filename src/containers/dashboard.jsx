@@ -31,7 +31,7 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                             {
                                 userData.websites.map(website => {
                                     return (
-                                        <Tile key={website.id} website={website}/>
+                                        <Tile key={website.id} website={website} setUserData={setUserData}/>
                                     )
                                 })
                             }

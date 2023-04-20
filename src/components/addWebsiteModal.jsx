@@ -11,8 +11,7 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
     const [websiteNotes, setWebsiteNotes] = useState("");
 
     const handleSaveWebsite = async () => {
-        console.log(userData)
-
+        console.log('simple:')
         console.log(simpleEncrypt('test123'))
         let new_website = {
             id: generateUuid(),
@@ -24,12 +23,18 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
             img: "",
         };
 
+        console.log('new_website')
+        console.log(new_website)
+
         let updatedUserData = userData;
 
         updatedUserData.websites.push(new_website)
         setUserData(updatedUserData);
 
         console.log('ADD WEBSITE')
+        console.log({
+            website: new_website
+        })
 
         // Save to DB
         fetch('http://localhost:8080/add-website', {

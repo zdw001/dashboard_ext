@@ -32,14 +32,13 @@ const TopNav = ({setShowAddWebsite, navigate, userData}) => {
                 </div>
             </div>
             <div className="settings">
-             <div className="nav-icon-wrapper">
+             <div className="nav-icon-wrapper" onClick={() => setShowSettingsMenu(true)}>
                 <div className='label text-small'>Settings</div>
-                <FaCog className='nav-icon icon-md'
-                    onClick={() => setShowSettingsMenu(prev => !prev)}/>
-                {
-                    showSettingsMenu && <SettingsMenu navigate={navigate} userData={userData}/>
-                }
+                <FaCog className='nav-icon icon-md' />
             </div>
+            {
+                showSettingsMenu && <SettingsMenu navigate={navigate} userData={userData} hideMenu={() => setShowSettingsMenu(false)}/>
+            }
             </div>
         </div>
     );

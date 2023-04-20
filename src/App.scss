@@ -430,7 +430,13 @@ body {
           }
 
           .settings-option {
+            width: 100%;
             padding: 10px 24px;
+            box-sizing: border-box;
+
+            &:hover {
+              background-color: #e2ebf9;
+            }
           }
         }
       }
@@ -463,7 +469,6 @@ body {
             padding: 10px;
             box-sizing: border-box;
             text-align: center;
-            overflow: hidden;
 
             &:hover {
               .tile-actions {
@@ -489,13 +494,39 @@ body {
                   color: $color-gray-300;
                 }
               }
+            }
 
-              .tile-settings {
-                position: absolute;
-                width: 280px;
-                top: 55px;
-                right: 0px;
-                z-index: 2;
+            .tile-settings {
+              position: absolute;
+              width: 180px;
+              top: 45px;
+              right: 10px;
+              z-index: 2;
+
+              .icon {
+                padding: 16px 18px;
+                color: $color-gray-200;
+              }
+
+              .options {
+                .option {
+                  display: flex;
+                  justify-content: flex-start;
+                  align-items: center;
+                  border-bottom: 2px solid $color-gray-150;
+
+                  &:hover {
+                    background-color: #e2ebf9;
+                  }
+
+                  &.delete {
+                    color: $red;
+
+                    &:hover {
+                      background-color: #ffd5cc;
+                    }
+                  }
+                }
               }
             }
 
@@ -612,12 +643,25 @@ body {
   padding: 6px;
   background-color: $color-gray-150;
   box-sizing: border-box;
+  position: absolute;
+  z-index: 2;
 
   .drop-down-list-content {
     width: 100%;
     border-radius: 16px;
     background-color: $color-white;
+    overflow: hidden;
+    vertical-align: bottom;
   }
+}
+
+.drop-down-list-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
 }
 
 @keyframes fade-in {

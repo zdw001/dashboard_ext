@@ -1,7 +1,7 @@
 import DropDownList from "../elements/dropDownList";
 import { generateRandomLogo } from "../utils/general";
 
-const SettingsMenu = ({ navigate, userData }) => {
+const SettingsMenu = ({ userData, hideMenu }) => {
 
     const handleSignOut = () => {  
         localStorage.clear();
@@ -10,7 +10,7 @@ const SettingsMenu = ({ navigate, userData }) => {
 
     return (
         <div className="settings-menu">
-            <DropDownList>
+            <DropDownList hideMenu={hideMenu}>
                 <div className="settings-header">
                     <div>
                         <div className='profile-logo-wrapper'

@@ -1,10 +1,6 @@
 import React from "react";
 
-const DropDownList = ({children}) => {
-    const handleHide = () => {
-      // TODO
-    };
-
+const DropDownList = ({hideMenu, children}) => {
     const renderChildren = () => {
         return React.Children.map(children, (child) => {
           return React.cloneElement(child, {
@@ -15,11 +11,14 @@ const DropDownList = ({children}) => {
     
 
     return (
-        <div className="drop-down-list-container">
-          <div className="drop-down-list-content">
-            { renderChildren() }
+        <>
+          <div className="drop-down-list-background" onClick={hideMenu}/>
+          <div className="drop-down-list-container">
+            <div className="drop-down-list-content">
+              { renderChildren() }
+            </div>
           </div>
-        </div>
+        </>
     );
 }
 

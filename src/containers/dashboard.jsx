@@ -4,7 +4,6 @@ import AddWebsiteModal from '../components/addWebsiteModal';
 import Modal from '../elements/modal';
 import Tile from '../components/tile';
 
-
 const Dashboard = ({ navigate, userData, setUserData }) => {
     const [showAddWebiste, setShowAddWebsite] = useState(false);
 

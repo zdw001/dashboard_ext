@@ -1,4 +1,5 @@
-import AES from 'crypto-js/aes';
+// import AES from 'crypto-js/aes';
+import * as CryptoJS from 'crypto-js';
 
 const validateEmail = (email) => {
     return String(email)
@@ -22,11 +23,11 @@ const generateUuid = () => {
 };
 
 const simpleEncrypt = (str) => {
-    return AES.encrypt(str, "superdupersecret123").toString();
+    return CryptoJS.AES.encrypt(str, "superdupersecret123").toString();
 }
 
 const simpleDecrypt = (str) => {
-    return AES.decrypt(str, "superdupersecret123").toString();
+    return CryptoJS.AES.decrypt(str, "superdupersecret123").toString(CryptoJS.enc.Utf8);
 }
 
 const generateRandomLogo = (str) => {

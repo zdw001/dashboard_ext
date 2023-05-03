@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'
 import {
     setCookie,
     validateEmail
 } from '../utils/general';
+import { setUserData } from '../slices/userDataSlice';
 
-const SignIn = ({ navigate, userData, setUserData }) => {
+const SignIn = ({ navigate }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [formError, setFormError] = useState(false);
+
+    const dispatch = useDispatch();
 
     const signInUrl = "http://localhost:8080/sign-in";
 
@@ -48,7 +52,7 @@ const SignIn = ({ navigate, userData, setUserData }) => {
             return response.json();
         }).then(data => {
             localStorage.setItem('token', data.token);
-            setUserData(data.user)
+            dispatch(setUserData(data.user));
 
             navigate("dashboard");
         }).catch(err => {

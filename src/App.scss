@@ -266,7 +266,7 @@ body {
 
         .search-blur {
           position: fixed;
-          z-index: 97;
+          z-index: 1;
           height: 100vh;
           width: 100vw;
           top: 0;
@@ -320,7 +320,7 @@ body {
 
         .search-wrapper {
           position: fixed;
-          z-index: 98;
+          z-index: 2;
           left: 50%;
           top: 42%;
           -webkit-transform: translate(-50%, -50%);
@@ -530,7 +530,7 @@ body {
               }
             }
 
-            .website-logo-wrapper {
+            .tile-logo-wrapper {
               height: 70px;
               width: 70px;
               border-radius: 35px;

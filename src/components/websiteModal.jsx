@@ -1,20 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import {
     generateUuid, simpleEncrypt, generateRandomLogo
 } from '../utils/general';
+import { setUserData, addWebsite } from "../slices/userDataSlice";
+import { simpleDecrypt } from "../utils/general";
 
-const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
+const WebsiteModal = ({handleHideModal, website_id}) => {
     const [websiteName, setWebsiteName] = useState("");
     const [websiteLink, setWebsiteLink] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [websiteNotes, setWebsiteNotes] = useState("");
 
+    const dispatch = useDispatch();
+
+    const userData = useSelector((state) => state.userData);
+
+    useEffect(() => {
+        if (website_id) {
+            let website = userData.websites.filter(x => x.website_id === website_id)[0];
+        
+            setWebsiteName(website.name);    
+            setWebsiteLink(website.link);    
+            setUsername(website.username);    
+            setPassword(simpleDecrypt(website.password));    
+            setWebsiteNotes(website.notes);    
+        }
+    }, []) 
+
     const handleSaveWebsite = async () => {
-        console.log('simple:')
-        console.log(simpleEncrypt('test123'))
         let new_website = {
-            id: generateUuid(),
+            website_id: generateUuid(),
             name: websiteName,
             link: websiteLink,
             username: username,
@@ -23,18 +40,7 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
             img: "",
         };
 
-        console.log('new_website')
-        console.log(new_website)
-
-        let updatedUserData = userData;
-
-        updatedUserData.websites.push(new_website)
-        setUserData(updatedUserData);
-
-        console.log('ADD WEBSITE')
-        console.log({
-            website: new_website
-        })
+        dispatch(addWebsite(new_website));
 
         // Save to DB
         fetch('http://localhost:8080/add-website', {
@@ -51,7 +57,7 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
             return response.json();
         }).then(data => {
             // SUCCESS
-            setUserData(data.user);
+            dispatch(setUserData(data.user));
 
             handleHideModal();
         }).catch(err => {
@@ -102,4 +108,4 @@ const AddWebsiteModal = ({handleHideModal, userData, setUserData}) => {
     );
 }
 
-export default AddWebsiteModal;
+export default WebsiteModal;

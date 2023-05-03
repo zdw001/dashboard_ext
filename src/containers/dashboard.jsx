@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import TopNav from '../components/topNav';
-import AddWebsiteModal from '../components/addWebsiteModal';
+import WebsiteModal from '../components/websiteModal';
 import Modal from '../elements/modal';
 import Tile from '../components/tile';
+import { simpleDecrypt, simpleEncrypt } from '../utils/general';
 
-const Dashboard = ({ navigate, userData, setUserData }) => {
+const Dashboard = ({ navigate }) => {
     const [showAddWebiste, setShowAddWebsite] = useState(false);
+    const userData = useSelector((state) => state.userData);
 
     useEffect(() => {
+        let encrypted = simpleEncrypt('test1345678');
+
+        let decrypted = simpleDecrypt(encrypted);
+        console.log('------------')
+        console.log('encrypted: ', encrypted)
+        console.log('decrypted: ', decrypted)
+        console.log('------------')
+
     }, []);
 
     return (
@@ -21,8 +32,8 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                 ) : (
                     <div>
                         { showAddWebiste && 
-                            <Modal hideModal={() => setShowAddWebsite(false)} userData={userData} setUserData={setUserData}>
-                                <AddWebsiteModal/>
+                            <Modal hideModal={() => setShowAddWebsite(false)}>
+                                <WebsiteModal />
                             </Modal>
                         }
                         <div className="tile-container">
@@ -30,7 +41,7 @@ const Dashboard = ({ navigate, userData, setUserData }) => {
                             {
                                 userData.websites.map(website => {
                                     return (
-                                        <Tile key={website.id} website={website} setUserData={setUserData}/>
+                                        <Tile key={website.website_id} website={website} />
                                     )
                                 })
                             }

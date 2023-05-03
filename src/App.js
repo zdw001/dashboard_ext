@@ -1,18 +1,25 @@
 import './App.scss';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import Dashboard from './containers/dashboard';
 import SignIn from './containers/signIn';
 import SignUp from './containers/signUp';
+import { setUserData } from './slices/userDataSlice';
 
 function App() {
   const [page, setPage] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const userData = useSelector((state) => state.userData);
+
+  const dispatch = useDispatch();
 
   const getUserDataUrl = "http://localhost:8080/get-session";
 
   useEffect(() => {
     handleSession();
   }, []);
+
+  useEffect(() => {
+  }, [userData])
 
   const handleSession = () => {
     // TODO
@@ -41,10 +48,7 @@ function App() {
       
       throw new Error('Something went wrong');
     }).then(data => {
-        console.log('SUCCESS')
-        console.log(data);
-
-        setUserData(data.user);
+        dispatch(setUserData(data.user));
     }).catch(err => {
         console.log('ERROR')
         console.log(err)
@@ -56,11 +60,11 @@ function App() {
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard userData={userData} setUserData={setUserData} navigate={setPage} />
+        return <Dashboard userData={userData} navigate={setPage} />
       case "sign-up":
-        return <SignUp userData={userData} setUserData={setUserData} navigate={setPage} />
+        return <SignUp navigate={setPage} />
       case "sign-in":
-        return <SignIn userData={userData} setUserData={setUserData} navigate={setPage} />
+        return <SignIn setUserData={setUserData} navigate={setPage} />
       default:
         return
     }

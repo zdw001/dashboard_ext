@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'
 import {
     setCookie,
     validateEmail,
     validatePassword
 } from '../utils/general';
+import { setUserData } from '../slices/userDataSlice';
 
-const SignUp = ({ navigate, userData, setUserData }) => {
+const SignUp = ({ navigate }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+
+    const dispatch = useDispatch();
 
     const signUpUrl = "http://localhost:8080/sign-up";
     const salt = 10;
@@ -58,8 +62,10 @@ const SignUp = ({ navigate, userData, setUserData }) => {
         }).then(function(response) {
             return response.json();
         }).then(data => {
+            console.log('sign up resp:')
+            console.log(data)
             localStorage.setItem('token', data.token);
-            setUserData(data.user);
+            dispatch(setUserData(data.user));
 
             navigate("dashboard");
         }).catch(err => {

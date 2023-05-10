@@ -6,28 +6,16 @@ import {
 import { setUserData, addWebsite } from "../slices/userDataSlice";
 import { simpleDecrypt } from "../utils/general";
 
-const WebsiteModal = ({handleHideModal, website_id}) => {
-    const [websiteName, setWebsiteName] = useState("");
-    const [websiteLink, setWebsiteLink] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [websiteNotes, setWebsiteNotes] = useState("");
+const WebsiteModal = ({handleHideModal, website}) => {
+    const [websiteName, setWebsiteName] = useState(website ? website.name : "");
+    const [websiteLink, setWebsiteLink] = useState(website ? website.link : "");
+    const [username, setUsername] = useState(website ? website.username : "");
+    const [password, setPassword] = useState(website ? simpleDecrypt(website.password) : "");
+    const [websiteNotes, setWebsiteNotes] = useState(website ? website.notes : "");
 
     const dispatch = useDispatch();
 
     const userData = useSelector((state) => state.userData);
-
-    useEffect(() => {
-        if (website_id) {
-            let website = userData.websites.filter(x => x.website_id === website_id)[0];
-        
-            setWebsiteName(website.name);    
-            setWebsiteLink(website.link);    
-            setUsername(website.username);    
-            setPassword(simpleDecrypt(website.password));    
-            setWebsiteNotes(website.notes);    
-        }
-    }, []) 
 
     const handleSaveWebsite = async () => {
         let new_website = {

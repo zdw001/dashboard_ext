@@ -2,20 +2,33 @@ import React, { useState } from "react";
 import { generateRandomLogo } from "../utils/general";
 import { FaEllipsisH, FaCopy } from 'react-icons/fa';
 import TileSettings from "./tileSettings";
-
+import Modal from "../elements/modal";
+import WebsiteModal from "./websiteModal";
 
 const Tile = ({website}) => {
   const [showTileSettings, setShowTileSettings] = useState(false);
+  const [showEditWebiste, setShowEditWebsite] = useState(false);
 
+  const handleHideEditWebsite = () => {
+    setShowEditWebsite(false);
+  }; 
+  
   return (
-    <div className="tile-wrapper">
+    <>
+      <div className="tile-wrapper">
         <div className="tile-content">
             <div className="tile-actions">
               <FaCopy className="icon" />
               <FaEllipsisH className="icon" onClick={() => setShowTileSettings(true)}/>
             </div>
             {
-              showTileSettings && <TileSettings website_id={website.website_id} hideMenu={() => setShowTileSettings(false)}/>
+              showTileSettings && 
+              <TileSettings 
+                website_id={website.website_id} 
+                hideMenu={() => setShowTileSettings(false)}
+                showEditWebsite={() => setShowEditWebsite(true)}
+                hideEditWesite={() => setShowEditWebsite(false)}
+              />
             }
             {
               website.img ? (
@@ -31,7 +44,13 @@ const Tile = ({website}) => {
             <div className="tile-name">{website.name}</div>
             <div className="tile-username text-small">{website.username}</div>
         </div>
-    </div>
+      </div>
+      { showEditWebiste && 
+          <Modal hideModal={handleHideEditWebsite}>
+              <WebsiteModal website={website} />
+          </Modal>
+      }
+    </>
   );
 }
 

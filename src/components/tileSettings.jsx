@@ -1,13 +1,8 @@
-import { useState } from "react";
 import DropDownList from "../elements/dropDownList";
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useDispatch } from 'react-redux'
 import { setUserData } from '../slices/userDataSlice';
-import Modal from "../elements/modal";
-import WebsiteModal from "./websiteModal";
-
-const TileSettings = ({hideMenu, website_id}) => {
-  const [showEditWebiste, setShowEditWebsite] = useState(false);
+const TileSettings = ({hideMenu, website_id, showEditWebsite, hideEditWebsite}) => {
 
   const dispatch = useDispatch();
 
@@ -40,17 +35,16 @@ const TileSettings = ({hideMenu, website_id}) => {
     });
   };
 
-  const handleEditWebsite = () => {
-    console.log('handleEditWebsite');
-
-    setShowEditWebsite(true);
+  const handleShowEditWebsite = () => {
+    showEditWebsite();
+    hideMenu();
   };
 
   return (
     <div className="tile-settings">
       <DropDownList hideMenu={hideMenu}>
         <div className="options">
-          <div className="option" onClick={handleEditWebsite}>
+          <div className="option" onClick={handleShowEditWebsite}>
             <FaEdit className="icon" />
             <span>Edit</span>
           </div>
@@ -60,11 +54,6 @@ const TileSettings = ({hideMenu, website_id}) => {
           </div>
         </div>
       </DropDownList>
-      { showEditWebiste && 
-          <Modal hideModal={() => setShowEditWebsite(false)}>
-              <WebsiteModal website_id={website_id} />
-          </Modal>
-      }
     </div>
   );
 };

@@ -1,25 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react';
+import { useSelector } from 'react-redux'
 import TopNav from '../components/topNav';
 import WebsiteModal from '../components/websiteModal';
 import Modal from '../elements/modal';
 import Tile from '../components/tile';
-import { simpleDecrypt, simpleEncrypt } from '../utils/general';
 
 const Dashboard = ({ navigate }) => {
     const [showAddWebiste, setShowAddWebsite] = useState(false);
     const userData = useSelector((state) => state.userData);
-
-    useEffect(() => {
-        let encrypted = simpleEncrypt('test1345678');
-
-        let decrypted = simpleDecrypt(encrypted);
-        console.log('------------')
-        console.log('encrypted: ', encrypted)
-        console.log('decrypted: ', decrypted)
-        console.log('------------')
-
-    }, []);
 
     return (
         <div className="dashboard">

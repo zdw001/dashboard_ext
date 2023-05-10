@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     generateUuid, simpleEncrypt, generateRandomLogo
 } from '../utils/general';
-import { setUserData, addWebsite } from "../slices/userDataSlice";
+import { setUserData, addWebsite, editWebsite } from "../slices/userDataSlice";
 import { simpleDecrypt } from "../utils/general";
 
 const WebsiteModal = ({handleHideModal, website}) => {
+    const [website_id] = useState(website ? website.website_id : generateUuid())
     const [websiteName, setWebsiteName] = useState(website ? website.name : "");
     const [websiteLink, setWebsiteLink] = useState(website ? website.link : "");
     const [username, setUsername] = useState(website ? website.username : "");
@@ -15,11 +16,14 @@ const WebsiteModal = ({handleHideModal, website}) => {
 
     const dispatch = useDispatch();
 
-    const userData = useSelector((state) => state.userData);
+    const userData = useSelector(state => state.userData);
+
 
     const handleSaveWebsite = async () => {
+        console.log('match: ', userData.websites.find(x => x.website_id === website_id)._id || null )
         let new_website = {
-            website_id: generateUuid(),
+            _id: userData.websites.find(x => x.website_id === website_id)._id || null,
+            website_id: website_id,
             name: websiteName,
             link: websiteLink,
             username: username,
@@ -28,32 +32,61 @@ const WebsiteModal = ({handleHideModal, website}) => {
             img: "",
         };
 
-        dispatch(addWebsite(new_website));
+        if (website) {
+            dispatch(editWebsite(new_website));
 
-        // Save to DB
-        fetch('http://localhost:8080/add-website', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                website: new_website
-            })
-        }).then(function(response) {
-            return response.json();
-        }).then(data => {
-            // SUCCESS
-            dispatch(setUserData(data.user));
+             // Save to DB
+             fetch('http://localhost:8080/edit-website', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    website: new_website
+                })
+            }).then(function(response) {
+                return response.json();
+            }).then(data => {
+                // SUCCESS
+                dispatch(setUserData(data.user));
 
-            handleHideModal();
-        }).catch(err => {
-            console.log('ERROR')
-            console.log(err)
+                handleHideModal();
+            }).catch(err => {
+                console.log('ERROR')
+                console.log(err)
 
-            // TODO: REVERT DATA
-        });
+                // TODO: REVERT DATA
+            });
+        } else {
+            dispatch(addWebsite(new_website));
+
+            // Save to DB
+            fetch('http://localhost:8080/add-website', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    website: new_website
+                })
+            }).then(function(response) {
+                return response.json();
+            }).then(data => {
+                // SUCCESS
+                dispatch(setUserData(data.user));
+
+                handleHideModal();
+            }).catch(err => {
+                console.log('ERROR')
+                console.log(err)
+
+                // TODO: REVERT DATA
+            });
+        }
     };
 
     return (

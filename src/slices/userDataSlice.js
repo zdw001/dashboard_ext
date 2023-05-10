@@ -25,6 +25,7 @@ export const counterSlice = createSlice({
     //   state.value += action.payload
     // },
     setUserData: (state, action) => {
+      console.log('userDataSlice.setUserData:')
       state._id = action.payload._id;
       state.username = action.payload.username;
       state.password = action.payload.password;
@@ -33,12 +34,21 @@ export const counterSlice = createSlice({
       state.websites = action.payload.websites;
     },
     addWebsite: (state, action) => {
+      console.log('userDataSlice.addWebsite:')
       state.websites.push(action.payload);
-    }
+    },
+    editWebsite: (state, action) => {
+      console.log('userDataSlice.editWebsite:')
+      console.log('state.websites: ', state.websites);
+      console.log('action.payload: ', action.payload)
+      // state.websites
+
+      state.websites.splice(state.websites.findIndex(x => x.webite_id === action.payload.website_id), 1, action.payload);
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserData, addWebsite } = counterSlice.actions
+export const { setUserData, addWebsite, editWebsite } = counterSlice.actions
 
 export default counterSlice.reducer

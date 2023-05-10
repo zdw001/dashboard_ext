@@ -60,11 +60,11 @@ function App() {
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard userData={userData} navigate={setPage} />
+        return <Dashboard navigate={setPage} />
       case "sign-up":
         return <SignUp navigate={setPage} />
       case "sign-in":
-        return <SignIn setUserData={setUserData} navigate={setPage} />
+        return <SignIn navigate={setPage} />
       default:
         return
     }

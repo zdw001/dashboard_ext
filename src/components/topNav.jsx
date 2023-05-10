@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SettingsMenu from '../components/settingsMenu';
 import SearchBackground from './background';
 import { FaCog, FaSearch, FaPlus } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchValue } from '../slices/searchValueSlice';
 
-const TopNav = ({setShowAddWebsite, navigate, userData}) => {
+const TopNav = ({setShowAddWebsite, navigate }) => {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-    const [showDashboard, setShowDashboard] = useState(false)
+    const [showDashboard, setShowDashboard] = useState(false);
+
+    const searchValue = useSelector(state => state.searchValue.value);
+
+    const dispatch = useDispatch();
+
+    const handleSearchInput = value => {
+        console.log('handleSearchInput')
+
+        dispatch(setSearchValue(value))
+    };
+
 
     return (
         <div className="top-nav">
@@ -25,6 +38,8 @@ const TopNav = ({setShowAddWebsite, navigate, userData}) => {
                         type="text"
                         placeholder="Search command center"
                         onClick={() => setShowDashboard(true)}
+                        value={searchValue}
+                        onChange={e => handleSearchInput(e.target.value)}
                     />
                 </div>
             </div>
@@ -34,7 +49,7 @@ const TopNav = ({setShowAddWebsite, navigate, userData}) => {
                 <FaCog className='nav-icon icon-md' />
             </div>
             {
-                showSettingsMenu && <SettingsMenu navigate={navigate} userData={userData} hideMenu={() => setShowSettingsMenu(false)}/>
+                showSettingsMenu && <SettingsMenu navigate={navigate} hideMenu={() => setShowSettingsMenu(false)}/>
             }
             </div>
         </div>

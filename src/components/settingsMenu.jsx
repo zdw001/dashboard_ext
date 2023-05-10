@@ -1,7 +1,9 @@
 import DropDownList from "../elements/dropDownList";
+import { useSelector } from "react-redux";
 import { generateRandomLogo } from "../utils/general";
 
-const SettingsMenu = ({ userData, hideMenu }) => {
+const SettingsMenu = ({ hideMenu }) => {
+    const userData = useSelector((state) => state.userData);
 
     const handleSignOut = () => {  
         localStorage.clear();

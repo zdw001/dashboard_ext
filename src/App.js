@@ -12,7 +12,7 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const getUserDataUrl = "http://localhost:8080/get-session";
+  const getUserDataUrl = "http://localhost:8085/get-session";
 
   useEffect(() => {
     handleSession();

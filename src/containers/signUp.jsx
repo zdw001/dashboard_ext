@@ -16,7 +16,7 @@ const SignUp = ({ navigate }) => {
 
     const dispatch = useDispatch();
 
-    const signUpUrl = "http://localhost:8080/sign-up";
+    const signUpUrl = "http://localhost:8085/sign-up";
     const salt = 10;
 
     useEffect(() => {

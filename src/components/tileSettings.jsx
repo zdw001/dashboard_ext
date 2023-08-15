@@ -10,7 +10,7 @@ const TileSettings = ({hideMenu, website_id, showEditWebsite, hideEditWebsite}) 
       // TODO: "are you sure?";
 
       // Save to DB
-      fetch('http://localhost:8080/delete-website', {
+      fetch('http://localhost:8085/delete-website', {
         method: 'POST',
         mode: 'cors',
         headers: {

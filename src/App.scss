@@ -460,6 +460,10 @@ body {
           padding: 10px;
           box-sizing: border-box;
 
+          &:hover {
+            cursor: pointer;
+          }
+
           .tile-content {
             position: relative;
             border: 1px solid $color-gray-200;

@@ -20,9 +20,9 @@ const WebsiteModal = ({handleHideModal, website}) => {
 
 
     const handleSaveWebsite = async () => {
-        console.log('match: ', userData.websites.find(x => x.website_id === website_id)._id || null )
+        console.log(userData.websites.find(x => x.website_id === website_id))
         let new_website = {
-            _id: userData.websites.find(x => x.website_id === website_id)._id || null,
+            _id: userData.websites.find(x => x.website_id === website_id) ? userData.websites.find(x => x.website_id === website_id)._id : null,
             website_id: website_id,
             name: websiteName,
             link: websiteLink,
@@ -36,7 +36,7 @@ const WebsiteModal = ({handleHideModal, website}) => {
             dispatch(editWebsite(new_website));
 
              // Save to DB
-             fetch('http://localhost:8080/edit-website', {
+             fetch('http://localhost:8085/edit-website', {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -63,7 +63,7 @@ const WebsiteModal = ({handleHideModal, website}) => {
             dispatch(addWebsite(new_website));
 
             // Save to DB
-            fetch('http://localhost:8080/add-website', {
+            fetch('http://localhost:8085/add-website', {
                 method: 'POST',
                 mode: 'cors',
                 headers: {

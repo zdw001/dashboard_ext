@@ -12,10 +12,14 @@ const Tile = ({website}) => {
   const handleHideEditWebsite = () => {
     setShowEditWebsite(false);
   }; 
+
+  const handleLaunchTile = () => {
+    window.location.href = website.link;
+  };
   
   return (
     <>
-      <div className="tile-wrapper">
+      <div className="tile-wrapper" onClick={handleLaunchTile}>
         <div className="tile-content">
             <div className="tile-actions">
               <FaCopy className="icon" />

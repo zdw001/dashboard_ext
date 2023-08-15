@@ -1,4 +1,5 @@
 import Astronaut from "./astronaut";
+import QuickLinks from "./quicklinks";
 
 const SearchBackground = () => {
   const getRandomNumber = (min, max) => {
@@ -12,6 +13,7 @@ const SearchBackground = () => {
   
   return (
     <div className="background">
+      <QuickLinks />
       <Astronaut getRandomNumber={getRandomNumber}/>
       {
         [...Array(200)].map((e, i) => {

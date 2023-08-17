@@ -6,7 +6,8 @@ const TileSettings = ({hideMenu, website_id, showEditWebsite, hideEditWebsite}) 
 
   const dispatch = useDispatch();
 
-  const handleDeleteWebsite = () => {
+  const handleDeleteWebsite = e => {
+      e.stopPropagation();
       // TODO: "are you sure?";
 
       // Save to DB
@@ -35,7 +36,8 @@ const TileSettings = ({hideMenu, website_id, showEditWebsite, hideEditWebsite}) 
     });
   };
 
-  const handleShowEditWebsite = () => {
+  const handleShowEditWebsite = e => {
+    e.stopPropagation();
     showEditWebsite();
     hideMenu();
   };
@@ -44,11 +46,11 @@ const TileSettings = ({hideMenu, website_id, showEditWebsite, hideEditWebsite}) 
     <div className="tile-settings">
       <DropDownList hideMenu={hideMenu}>
         <div className="options">
-          <div className="option" onClick={handleShowEditWebsite}>
+          <div className="option" onClick={e => handleShowEditWebsite(e)}>
             <FaEdit className="icon" />
             <span>Edit</span>
           </div>
-          <div className="option delete" onClick={handleDeleteWebsite}>
+          <div className="option delete" onClick={e => handleDeleteWebsite(e)}>
             <FaTrash className="icon" />
             <span>Delete</span>
           </div>

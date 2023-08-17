@@ -23,13 +23,13 @@ const Tile = ({website}) => {
         <div className="tile-content">
             <div className="tile-actions">
               <FaCopy className="icon" />
-              <FaEllipsisH className="icon" onClick={() => setShowTileSettings(true)}/>
+              <FaEllipsisH className="icon" onClick={e => {e.stopPropagation(); setShowTileSettings(true)}}/>
             </div>
             {
               showTileSettings && 
               <TileSettings 
                 website_id={website.website_id} 
-                hideMenu={() => setShowTileSettings(false)}
+                hideMenu={e => {e.stopPropagation(); setShowTileSettings(false)}}
                 showEditWebsite={() => setShowEditWebsite(true)}
                 hideEditWesite={() => setShowEditWebsite(false)}
               />

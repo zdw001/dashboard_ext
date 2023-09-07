@@ -1,7 +1,4 @@
-import Astronaut from "./astronaut";
-import QuickLinks from "./quicklinks";
-
-const SearchBackground = () => {
+const Background = () => {
   const getRandomNumber = (min, max) => {
     return Math.random() * (max - min + 1) + min
   }
@@ -13,8 +10,6 @@ const SearchBackground = () => {
   
   return (
     <div className="background">
-      <QuickLinks />
-      <Astronaut getRandomNumber={getRandomNumber}/>
       {
         [...Array(200)].map((e, i) => {
           let size = `${getRandomNumber(0.5, 2)}px`;
@@ -36,4 +31,4 @@ const SearchBackground = () => {
   )
 };
 
-export default SearchBackground;
+export default Background;

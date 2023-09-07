@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import SettingsMenu from '../components/settingsMenu';
-import SearchBackground from './background';
+import SearchBackground from './searchBackground';
 import { FaCog, FaSearch, FaPlus } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../slices/searchValueSlice';

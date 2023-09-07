@@ -15,6 +15,14 @@ $color-gray-500: #666666;
 $color-gray-600: #4d4d4d;
 $color-gray-700: #333333;
 $color-gray-800: #1a1a1a;
+$color-space-100: #e9e9e9;
+$color-space-200: #c5c8ce;
+$color-space-300: #8c8f96;
+$color-space-400: #636874;
+$color-space-500: #4a4f5a;
+$color-space-600: #363b44;
+$color-space-700: #2a2e35;
+$color-space-800: #1e2126;
 $red: #FF5733;
 $box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0,
 rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -229,24 +237,20 @@ body {
           transition: max-width 0.3s ease-in-out;
           overflow: hidden;
           margin: 0 12px;
-          color: $color-gray-700;
+          color: $color-gray-100;
         }
 
         .nav-icon {
-          color: $color-gray-600;
+          color: $color-gray-100;
         }
 
         &:hover {
           cursor: pointer;
-          background-color: $color-gray-100;
+          background-color: $color-space-500;
 
           .label {
             display: inline;
             max-width: 300px;
-          }
-
-          .nav-icon {
-            color: $color-gray-700;
           }
         }
       }
@@ -279,80 +283,6 @@ body {
           &.show-dashboard {
             opacity: 0;
             z-index: -1;
-          }
-
-          .background {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            background-color: #282A35;
-
-            .quick-links {
-              background-color: $color-gray-100;
-              padding: 6px;
-              position: absolute;
-              top: 40px;
-              right: 40px;
-              border-radius: $border-radius-sm;
-              display: flex;
-              z-index: 2;
-
-              .link {
-                height: 40px;
-                width: 55px;
-                padding: 6px 10px 18px;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-
-                &:hover {
-                  background-color: $color-gray-200;
-                  border-radius: $border-radius-sm;
-                  cursor: pointer;
-                }
-
-                img {
-                  display: block;
-                  height: 100%;
-                  align-self: center;
-                }
-
-                .link-text {
-                  margin-top: -2px;
-                  font-size: 0.75rem;
-                }
-              }
-            }
-
-            .star {
-              height: 2px;
-              width: 2px;
-              position: absolute;
-              border-radius: 12px;
-              box-shadow: 0 0 5px 0.5px rgba($color: $color-white, $alpha: 0.5);
-              animation-duration: 3s;
-              animation-name: twinkle;
-              animation-iteration-count: infinite;
-              animation-direction: alternate;
-            }
-
-            .astronaut {
-              position: absolute;
-              top: -200px;
-              left: -200px;
-              z-index: 99;
-              height: 100px;
-              transition: 8s all linear;
-              animation-name: spin;
-              animation-duration: 6000ms;
-              animation-iteration-count: infinite;
-              animation-timing-function: linear; 
-
-              img {
-                height: 100px;
-                transition: 8s all linear;
-              }
-            }
           }
         }
 
@@ -513,8 +443,9 @@ body {
 
           .tile-content {
             position: relative;
-            border: 1px solid $color-gray-200;
-            background-color: $color-gray-100;
+            border: 2px solid $color-space-400;
+            background-color: $color-space-500;
+            color: $color-space-100 ;
             height: 100%;
             border-radius: $border-radius-lg;
             padding: 10px;
@@ -538,11 +469,11 @@ body {
 
               .icon {
                 padding: 16px 18px;
-                color: $color-gray-200;
+                color: $color-gray-100;
 
                 &:hover {
                   cursor: pointer;
-                  color: $color-gray-300;
+                  color: $color-gray-200;
                 }
               }
             }
@@ -604,7 +535,7 @@ body {
             }
 
             .tile-username {
-              color: $color-gray-400;
+              color: $color-gray-300;
             }
           }
         }
@@ -625,6 +556,15 @@ body {
           }
         }
       }
+    }
+
+    .dashboard-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
     }
   }
 
@@ -682,6 +622,80 @@ body {
         margin-top: 10px;
         margin-left: 10px;
       }
+    }
+  }
+
+  .quick-links {
+    background-color: $color-gray-100;
+    padding: 6px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    border-radius: $border-radius-sm;
+    display: flex;
+    z-index: 2;
+
+    .link {
+      height: 40px;
+      width: 55px;
+      padding: 6px 10px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+
+      &:hover {
+        background-color: $color-gray-200;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        align-self: center;
+      }
+
+      .link-text {
+        margin-top: -2px;
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .astronaut {
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    z-index: 99;
+    height: 100px;
+    transition: 8s all linear;
+    animation-name: spin;
+    animation-duration: 6000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+
+    img {
+      height: 100px;
+      transition: 8s all linear;
+    }
+  }
+
+  .background {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #282A35;
+
+    .star {
+      height: 2px;
+      width: 2px;
+      position: absolute;
+      border-radius: 12px;
+      box-shadow: 0 0 5px 0.5px rgba($color: $color-white, $alpha: 0.5);
+      animation-duration: 3s;
+      animation-name: twinkle;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
     }
   }
 }

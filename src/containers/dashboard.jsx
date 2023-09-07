@@ -4,6 +4,7 @@ import TopNav from '../components/topNav';
 import WebsiteModal from '../components/websiteModal';
 import Modal from '../elements/modal';
 import Tile from '../components/tile';
+import Background from '../elements/background';
 
 const Dashboard = ({ navigate }) => {
     const websites = useSelector(state => state.userData.websites);
@@ -45,6 +46,9 @@ const Dashboard = ({ navigate }) => {
                     </div>
                 
                 </div>
+            </div>
+            <div className="dashboard-background">
+                <Background />
             </div>
         </div>
     );

@@ -494,6 +494,7 @@ body {
                 .option {
                   display: flex;
                   justify-content: flex-start;
+                  color: $color-gray-800;
                   align-items: center;
                   border-bottom: 2px solid $color-gray-150;
 
@@ -650,7 +651,6 @@ body {
       }
 
       img {
-        display: block;
         height: 100%;
         align-self: center;
       }
@@ -658,6 +658,7 @@ body {
       .link-text {
         margin-top: -2px;
         font-size: 0.75rem;
+        display: block;
       }
     }
   }
